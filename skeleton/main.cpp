@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "Particle.h"
+#include "Proyectil.h"
 
 #include "core.hpp"
 #include "RenderUtils.hpp"
@@ -30,7 +31,7 @@ PxPvd*                  gPvd        = NULL;
 PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 
-Particle* particle = NULL;
+std::vector<Proyectil*> gestorParticulas;
 
 ContactReportCallback gContactReportCallback;
 
@@ -59,7 +60,6 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 
-	particle = new Particle(Vector3(10, 35, 0), Vector3(0, 50, 0),Vector3(0,-9.8,0),0.999);
 
 	}
 
@@ -72,7 +72,8 @@ void stepPhysics(bool interactive, double t)
 	PX_UNUSED(interactive);
 
 
-	particle->integrate(t);
+	for(int i=0;i< gestorParticulas.size();i++)
+		gestorParticulas[i]->integrate(t);
 	gScene->simulate(t);
 	gScene->fetchResults(true);
 }
@@ -92,7 +93,10 @@ void cleanupPhysics(bool interactive)
 	gPvd->release();
 	transport->release();
 	
-	delete particle;
+	for (int i = 0; i < gestorParticulas.size(); i++)
+		delete gestorParticulas[i];
+
+	
 
 	gFoundation->release();
 	}
@@ -104,7 +108,12 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 	switch(toupper(key))
 	{
-	//case 'B': break;
+	case 'B': 
+	{
+		gestorParticulas.push_back(new Proyectil(TipoBala::PISTOL));
+		break; 
+	}
+
 	//case ' ':	break;
 	case ' ':
 	{

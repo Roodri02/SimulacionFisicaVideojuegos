@@ -12,6 +12,11 @@ Particle::Particle(Vector3 pos, Vector3 Vel,Vector3 Ace, double damp)
 	RegisterRenderItem(renderItem);
 }
 
+Particle::Particle() {
+	renderItem = new RenderItem(CreateShape(PxSphereGeometry(5)), &pose, Vector4(0.2, 0.5, 0.8, 1));
+	RegisterRenderItem(renderItem);
+}
+
 Particle::~Particle() {
 	DeregisterRenderItem(renderItem);
 }
