@@ -6,6 +6,7 @@
 
 #include "Particle.h"
 #include "Proyectil.h"
+#include "Diana.h"
 
 #include "core.hpp"
 #include "RenderUtils.hpp"
@@ -32,6 +33,8 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 
 std::vector<Proyectil*> gestorParticulas;
+
+Diana* diana;
 
 ContactReportCallback gContactReportCallback;
 
@@ -72,8 +75,18 @@ void stepPhysics(bool interactive, double t)
 	PX_UNUSED(interactive);
 
 
-	for(int i=0;i< gestorParticulas.size();i++)
+	diana = new Diana();
+
+	for (int i = 0; i < gestorParticulas.size(); i++) {
+		
 		gestorParticulas[i]->integrate(t);
+		
+		if (!gestorParticulas[i]->isAlive()) {
+			delete gestorParticulas[i];
+			gestorParticulas.erase(gestorParticulas.begin() + i);
+			i--;
+		}
+	}
 	gScene->simulate(t);
 	gScene->fetchResults(true);
 }
@@ -111,6 +124,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'B': 
 	{
 		gestorParticulas.push_back(new Proyectil(TipoBala::PISTOL));
+
 		break; 
 	}
 	case 'C':
@@ -120,7 +134,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	}
 	case 'V':
 	{
-		gestorParticulas.push_back(new Proyectil(TipoBala::LASER));
+		gestorParticulas.push_back(new Proyectil(TipoBala::SNOWBALL));
 		break;
 	}
 
