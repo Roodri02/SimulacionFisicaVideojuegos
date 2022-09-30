@@ -113,6 +113,16 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		gestorParticulas.push_back(new Proyectil(TipoBala::PISTOL));
 		break; 
 	}
+	case 'C':
+	{
+		gestorParticulas.push_back(new Proyectil(TipoBala::ARTILLERY));
+		break;
+	}
+	case 'V':
+	{
+		gestorParticulas.push_back(new Proyectil(TipoBala::LASER));
+		break;
+	}
 
 	//case ' ':	break;
 	case ' ':

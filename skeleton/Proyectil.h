@@ -2,8 +2,6 @@
 #include "Particle.h"
 
 
-enum TipoBala{ PISTOL, ARTILLERY , FIREBALL , LASER };
-
 
 class Proyectil : public Particle
 {

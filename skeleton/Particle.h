@@ -2,6 +2,10 @@
 #include "RenderUtils.hpp"
 #include "core.hpp"
 
+
+enum TipoBala { PISTOL, ARTILLERY, FIREBALL, LASER };
+
+
 class Particle
 {
 public:
@@ -13,11 +17,8 @@ public:
 	
 protected:
 
-	void setMass(double mass_) { masa = mass_; };
-	void setVelocity(Vector3 Vel) { vel = Vel; };
-	void setPosition(Vector3 Pos) { pose.p = Pos; };
-	void setAceleration(Vector3 Ace) { ace = Ace; };
-	void setDamping(double damp) { damping = damp; };
+	void setParticle(double mass_, double damp, Vector3 Vel, Vector3 Pos, Vector3 Ace);
+	RenderItem* renderItem;
 
 private:
 
@@ -26,6 +27,5 @@ private:
 	Vector3 ace;
 	double damping,masa;
 	physx::PxTransform pose;
-	RenderItem* renderItem;
 };
 
