@@ -6,17 +6,17 @@ Proyectil::Proyectil(TipoBala tipoBala_)
 	switch (tipoBala_)
 	{
 	case PISTOL: {
-		setParticle(200, 0.99,5, GetCamera()->getDir() * 1500, GetCamera()->getEye(), { 0,-9.8,0 },{1,0,0,1});
+		setParticle(0.032, 0.99,5, GetCamera()->getDir() * 500, GetCamera()->getEye(), { 0,-9.8,0 },{1,0,0,1},0.3f);
 		break;
 	}
 	case ARTILLERY:
-		setParticle(400, 0.6,5, GetCamera()->getDir() * 700, GetCamera()->getEye(), { 0,-9.8,0 }, { 0,1,0,1 });
+		setParticle(42.840, 0.99,5, GetCamera()->getDir() * 300, GetCamera()->getEye(), { 0,-9.8,0 }, { 0,1,0,1 },7.0f);
 		break;
 	case FIREBALL:
-		setParticle(1000, 0.5,5, GetCamera()->getDir() * 500, GetCamera()->getEye(), { 0,-9.8,0 }, { 0,0,1,1 });
+		//setParticle(1000, 0.99,5, GetCamera()->getDir() * 50, GetCamera()->getEye(), { 0,-9.8,0 }, { 0,0,1,1 },3.0f);
 		break;
 	case SNOWBALL:
-		setParticle(1760, 0.3,5, GetCamera()->getDir() * 400, GetCamera()->getEye(), { 0,-9.8,0 }, { 1,1,0,1 });
+		//setParticle(1760, 0.99,5, GetCamera()->getDir() * 75, GetCamera()->getEye(), { 0,-9.8,0 }, { 1,1,0,1 },1.0f);
 		break;
 	default:
 		break;

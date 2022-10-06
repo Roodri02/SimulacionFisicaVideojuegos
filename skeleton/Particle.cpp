@@ -31,7 +31,7 @@ void Particle::integrate(double t)
 	std::cout << t << "\n";
 }
 
-void Particle::setParticle(double mass_, double damp, double lifeTime_, Vector3 Vel, Vector3 Pos, Vector3 Ace, Vector4 color)
+void Particle::setParticle(double mass_, double damp, double lifeTime_, Vector3 Vel, Vector3 Pos, Vector3 Ace, Vector4 color,double tamano)
 {
 	masa = mass_;
 	vel = Vel;
@@ -39,5 +39,5 @@ void Particle::setParticle(double mass_, double damp, double lifeTime_, Vector3 
 	damping = damp;
 	lifeTime = lifeTime_;
 	pose = PxTransform(Pos.x, Pos.y, Pos.z);
-	renderItem = new RenderItem(CreateShape(PxSphereGeometry(5)), &pose, color);
+	renderItem = new RenderItem(CreateShape(PxSphereGeometry(tamano)), &pose, color);
 }

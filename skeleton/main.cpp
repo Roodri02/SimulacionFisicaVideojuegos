@@ -121,22 +121,27 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 	switch(toupper(key))
 	{
-	case 'B': 
+	case 'Z': 
 	{
 		gestorParticulas.push_back(new Proyectil(TipoBala::PISTOL));
 
 		break; 
 	}
-	case 'C':
+	case 'X':
 	{
 		gestorParticulas.push_back(new Proyectil(TipoBala::ARTILLERY));
 		break;
 	}
-	case 'V':
-	{
-		gestorParticulas.push_back(new Proyectil(TipoBala::SNOWBALL));
-		break;
-	}
+	//case 'C':
+	//{
+	//	gestorParticulas.push_back(new Proyectil(TipoBala::FIREBALL ));
+	//	break;
+	//}
+	//case 'V':
+	//{
+	//	gestorParticulas.push_back(new Proyectil(TipoBala::SNOWBALL));
+	//	break;
+	//}
 
 	//case ' ':	break;
 	case ' ':

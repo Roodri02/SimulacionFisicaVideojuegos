@@ -18,7 +18,7 @@ public:
 	
 protected:
 
-	void setParticle(double mass_, double damp, double lifeTime_, Vector3 Vel, Vector3 Pos, Vector3 Ace,Vector4 color);
+	void setParticle(double mass_, double damp, double lifeTime_, Vector3 Vel, Vector3 Pos, Vector3 Ace,Vector4 color,double tamano);
 	RenderItem* renderItem;
 
 private:
