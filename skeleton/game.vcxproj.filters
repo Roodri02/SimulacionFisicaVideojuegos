@@ -13,6 +13,9 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Proyectil.cpp" />
     <ClCompile Include="Diana.cpp" />
+    <ClCompile Include="PartycleSystem.cpp" />
+    <ClCompile Include="ParticleGenerator.cpp" />
+    <ClCompile Include="GaussianParticleGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -27,6 +30,9 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Proyectil.h" />
     <ClInclude Include="Diana.h" />
+    <ClInclude Include="PartycleSystem.h" />
+    <ClInclude Include="ParticleGenerator.h" />
+    <ClInclude Include="GaussianParticleGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
