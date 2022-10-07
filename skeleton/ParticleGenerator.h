@@ -7,7 +7,8 @@ using namespace std;
 class ParticleGenerator 
 {
 public:
-
+	ParticleGenerator() {};
+	~ParticleGenerator() {};
 
 protected:
 
