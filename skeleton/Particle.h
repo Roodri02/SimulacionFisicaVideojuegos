@@ -15,10 +15,12 @@ public:
 
 	void integrate(double t);
 	bool isAlive() { return isAlive_; };
+
+	void setParticle(double mass_, double damp, double lifeTime_, Vector3 Vel, Vector3 Pos, Vector3 Ace, Vector4 color, double tamano);
 	
 protected:
 
-	void setParticle(double mass_, double damp, double lifeTime_, Vector3 Vel, Vector3 Pos, Vector3 Ace,Vector4 color,double tamano);
+
 	RenderItem* renderItem;
 
 private:

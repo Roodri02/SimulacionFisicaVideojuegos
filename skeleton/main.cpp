@@ -7,6 +7,7 @@
 #include "Particle.h"
 #include "Proyectil.h"
 #include "Diana.h"
+#include "GaussianParticleGenerator.h"
 
 #include "core.hpp"
 #include "RenderUtils.hpp"
@@ -33,6 +34,8 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 
 std::vector<Proyectil*> gestorParticulas;
+GaussianParticleGenerator* g = new GaussianParticleGenerator({1,1,1},{10,3,0},2,5,20,0.9,{-100,10,-100},{30,10,0});
+list<Particle*> part;
 
 Diana* diana;
 
@@ -64,6 +67,7 @@ void initPhysics(bool interactive)
 	gScene = gPhysics->createScene(sceneDesc);
 
 
+
 	}
 
 
@@ -74,8 +78,17 @@ void stepPhysics(bool interactive, double t)
 {
 	PX_UNUSED(interactive);
 
-
+	
 	diana = new Diana();
+
+	list<Particle*> aux;
+	aux = g->generateParticles();
+	for (auto i : aux)
+		part.push_back(i);
+
+	for (auto i : part) {
+		i->integrate(t);
+	}
 
 	for (int i = 0; i < gestorParticulas.size(); i++) {
 		
