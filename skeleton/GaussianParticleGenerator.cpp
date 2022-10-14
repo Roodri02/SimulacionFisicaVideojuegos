@@ -1,6 +1,7 @@
 #include "GaussianParticleGenerator.h"
 
-GaussianParticleGenerator::GaussianParticleGenerator(string name_,Vector3 std_dev_pos_, Vector3 std_dev_vel_, double std_dev_t_,double _mean_t_, int num_particles_, double generation_probability_, Vector3 mean_pos_, Vector3 mean_vel_ , Vector4 color)
+GaussianParticleGenerator::GaussianParticleGenerator(string name_,Vector3 std_dev_pos_, Vector3 std_dev_vel_, double std_dev_t_,
+	double _mean_t_, int num_particles_, double generation_probability_, Vector3 mean_pos_, Vector3 mean_vel_ , Vector4 color,double mass_, double damp_ ,double tamanio_, Vector3 ace)
 {
 	name = name_;
 	std_dev_pos = std_dev_pos_;
@@ -12,10 +13,13 @@ GaussianParticleGenerator::GaussianParticleGenerator(string name_,Vector3 std_de
 	mean_vel = mean_vel_;
 	mean_t = _mean_t_;
 	color_ = color;
+	mass = mass_;
+	damp = damp_;
+	ace_ = ace;
+	tamanio = tamanio_;
 
 	std::random_device rd{};
-	//std::seed_seq seed2{ rd(),rd(),rd(),rd(),rd(),rd(),rd(),rd() };
-	gen = mt19937{rd()};
+	 gen = mt19937{rd()};
 
 	px =  normal_distribution<>{ mean_pos.x, std_dev_pos.x };
 	py =  normal_distribution<>{ mean_pos.y, std_dev_pos.y };
@@ -26,6 +30,7 @@ GaussianParticleGenerator::GaussianParticleGenerator(string name_,Vector3 std_de
 	vz = normal_distribution<>{ mean_vel.z, std_dev_vel.z };
 
 	distr = std::uniform_real_distribution<double>(0, 1);
+	tiempoVida = normal_distribution<>(mean_t, std_dev_t);
 }
 
 GaussianParticleGenerator::~GaussianParticleGenerator()
@@ -46,7 +51,9 @@ list<Particle*> GaussianParticleGenerator::generateParticles()
 			Vector3 pPos = { float(px(gen)),float(py(gen)),float(pz(gen)) };
 			Vector3 vVel = { float(vx(gen)),float(vy(gen)),float(vz(gen)) };
 
-			particleNew->setParticle(4, 0.555, 5, vVel, pPos, { 0,-9.8,0 }, color_, 0.3);
+			double time = tiempoVida(gen);
+
+			particleNew->setParticle(mass, damp, time, vVel, pPos, ace_, color_, tamanio);
 
 			particles.push_back(particleNew);
 

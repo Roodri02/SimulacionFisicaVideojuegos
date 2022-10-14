@@ -18,11 +18,12 @@ protected:
 	double generation_probability,mean_t;
 	int num_particles;
 
-	Particle* model;
+	double  mass, damp , tamanio;
+	Vector3 ace_;
+
 
 public:
 
-	void setParticle(Particle* model);
 	virtual list<Particle*> generateParticles() = 0;
 	
 
