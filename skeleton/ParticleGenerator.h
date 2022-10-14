@@ -15,10 +15,16 @@ protected:
 	string name;
 	Vector3 mean_pos, mean_vel;
 
+	Vector3 ambientPos;
+	Vector3 ambientWidth;
+
+	Vector4 color_;
+
 	double generation_probability,mean_t;
 	int num_particles;
 
 	double  mass, damp , tamanio;
+	bool destroySpace;
 	Vector3 ace_;
 
 

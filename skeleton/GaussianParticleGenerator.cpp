@@ -1,7 +1,8 @@
 #include "GaussianParticleGenerator.h"
 
 GaussianParticleGenerator::GaussianParticleGenerator(string name_,Vector3 std_dev_pos_, Vector3 std_dev_vel_, double std_dev_t_,
-	double _mean_t_, int num_particles_, double generation_probability_, Vector3 mean_pos_, Vector3 mean_vel_ , Vector4 color,double mass_, double damp_ ,double tamanio_, Vector3 ace)
+	double _mean_t_, int num_particles_, double generation_probability_, Vector3 mean_pos_, Vector3 mean_vel_ , Vector4 color,double mass_, double damp_ ,double tamanio_, Vector3 ace,
+	Vector3 ambientPos_, Vector3 ambientWidth_,bool destroySpace_)
 {
 	name = name_;
 	std_dev_pos = std_dev_pos_;
@@ -17,6 +18,9 @@ GaussianParticleGenerator::GaussianParticleGenerator(string name_,Vector3 std_de
 	damp = damp_;
 	ace_ = ace;
 	tamanio = tamanio_;
+	ambientPos = ambientPos_;
+	ambientWidth = ambientWidth_;
+	destroySpace = destroySpace_;
 
 	std::random_device rd{};
 	 gen = mt19937{rd()};
@@ -53,7 +57,7 @@ list<Particle*> GaussianParticleGenerator::generateParticles()
 
 			double time = tiempoVida(gen);
 
-			particleNew->setParticle(mass, damp, time, vVel, pPos, ace_, color_, tamanio);
+			particleNew->setParticle(mass, damp, time, vVel, pPos, ace_, color_, tamanio,ambientPos,ambientWidth,destroySpace);
 
 			particles.push_back(particleNew);
 

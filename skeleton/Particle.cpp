@@ -28,16 +28,29 @@ void Particle::integrate(double t)
 		isAlive_ = false;
 	pose.p = pose.p + vel * t;
 	vel = vel * pow(damping, t) + ace * t;
+
+	if (destroySpace) {
+		if (pose.p.x > actionSpace.x + actionSpaceWidth.x / 2 || pose.p.x < actionSpace.x - actionSpaceWidth.x / 2
+			|| pose.p.y > actionSpace.y + actionSpaceWidth.y / 2 || pose.p.y < actionSpace.y - actionSpaceWidth.y / 2
+			|| pose.p.z > actionSpace.z + actionSpaceWidth.z / 2 || pose.p.z < actionSpace.z - actionSpaceWidth.z / 2)
+			isAlive_ = false;
+	}
+
+
 	std::cout << t << "\n";
 }
 
-void Particle::setParticle(double mass_, double damp, double lifeTime_, Vector3 Vel, Vector3 Pos, Vector3 Ace, Vector4 color,double tamano)
+void Particle::setParticle(double mass_, double damp, double lifeTime_, Vector3 Vel, Vector3 Pos, Vector3 Ace, Vector4 color,
+	double tamano,Vector3 actionSpace_,Vector3 actionSpaceWidth_,bool dSpace_)
 {
 	masa = mass_;
 	vel = Vel;
 	ace = Ace;
 	damping = damp;
 	lifeTime = lifeTime_;
+	destroySpace = dSpace_;
+	actionSpace = actionSpace_;
+	actionSpaceWidth = actionSpaceWidth_;
 	pose = PxTransform(Pos.x, Pos.y, Pos.z);
 	renderItem = new RenderItem(CreateShape(PxSphereGeometry(tamano)), &pose, color);
 }

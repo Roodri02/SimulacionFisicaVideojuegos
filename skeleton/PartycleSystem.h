@@ -2,6 +2,7 @@
 #include <list>
 #include "Particle.h"
 #include "GaussianParticleGenerator.h"
+#include "UniformParticleGenerator.h"
 
 class PartycleSystem
 {
