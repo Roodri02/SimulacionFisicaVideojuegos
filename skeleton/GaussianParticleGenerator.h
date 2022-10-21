@@ -8,8 +8,7 @@ class GaussianParticleGenerator : public ParticleGenerator
 {
 public:
 	GaussianParticleGenerator(string name,Vector3 std_dev_pos_, Vector3 std_dev_vel_, double std_dev_t_,double _mean_t_, int num_particles_ ,
-		double generation_probability_,Vector3 mean_pos_,Vector3 mean_vel_, Vector4 color,double  mass, double damp, double tamanio_ ,Vector3 ace_,
-		Vector3 ambientPos_, Vector3 ambientWidth_, bool destroySpace_);
+		double generation_probability_,Particle* p);
 	~GaussianParticleGenerator();
 
 	list<Particle*> generateParticles() override;
@@ -31,6 +30,7 @@ private:
 
 	std::uniform_real_distribution<double> distr;
 	normal_distribution<> tiempoVida;
+
 
 };
 

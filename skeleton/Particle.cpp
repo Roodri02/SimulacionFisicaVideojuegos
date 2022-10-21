@@ -5,12 +5,12 @@ using namespace physx;
 
 Particle::Particle(Vector3 pos, Vector3 Vel,Vector3 Ace, double damp, double lifeTime_, Vector4 color)
 {
-	vel = Vel;
-	ace = Ace;
-	damping = damp;
-	lifeTime = lifeTime_;
-	pose = PxTransform(pos.x,pos.y,pos.z);
-	renderItem = new RenderItem(CreateShape(PxSphereGeometry(40)), &pose,color);
+	p.vel = Vel;
+	p.ace = Ace;
+	p.damping = damp;
+	p.lifeTime = lifeTime_;
+	p.pose = PxTransform(pos.x,pos.y,pos.z);
+	renderItem = new RenderItem(CreateShape(PxSphereGeometry(40)), &p.pose,color);
 }
 
 Particle::Particle() {
@@ -23,17 +23,17 @@ Particle::~Particle() {
 
 void Particle::integrate(double t)
 {
-	lifeTime -= t;
-	if (lifeTime < 0)
-		isAlive_ = false;
-	pose.p = pose.p + vel * t;
-	vel = vel * pow(damping, t) + ace * t;
+	p.lifeTime -= t;
+	if (p.lifeTime < 0)
+		p.isAlive_ = false;
+	p.pose.p = p.pose.p + p.vel * t;
+	p.vel = p.vel * pow(p.damping, t) + p.ace * t;
 
-	if (destroySpace) {
-		if (pose.p.x > actionSpace.x + actionSpaceWidth.x / 2 || pose.p.x < actionSpace.x - actionSpaceWidth.x / 2
-			|| pose.p.y > actionSpace.y + actionSpaceWidth.y / 2 || pose.p.y < actionSpace.y - actionSpaceWidth.y / 2
-			|| pose.p.z > actionSpace.z + actionSpaceWidth.z / 2 || pose.p.z < actionSpace.z - actionSpaceWidth.z / 2)
-			isAlive_ = false;
+	if (p.destroySpace) {
+		if (p.pose.p.x > p.actionSpace.x + p.actionSpaceWidth.x / 2 || p.pose.p.x < p.actionSpace.x - p.actionSpaceWidth.x / 2
+			|| p.pose.p.y > p.actionSpace.y + p.actionSpaceWidth.y / 2 || p.pose.p.y < p.actionSpace.y - p.actionSpaceWidth.y / 2
+			|| p.pose.p.z > p.actionSpace.z + p.actionSpaceWidth.z / 2 || p.pose.p.z < p.actionSpace.z - p.actionSpaceWidth.z / 2)
+			p.isAlive_ = false;
 	}
 
 
@@ -43,14 +43,14 @@ void Particle::integrate(double t)
 void Particle::setParticle(double mass_, double damp, double lifeTime_, Vector3 Vel, Vector3 Pos, Vector3 Ace, Vector4 color,
 	double tamano,Vector3 actionSpace_,Vector3 actionSpaceWidth_,bool dSpace_)
 {
-	masa = mass_;
-	vel = Vel;
-	ace = Ace;
-	damping = damp;
-	lifeTime = lifeTime_;
-	destroySpace = dSpace_;
-	actionSpace = actionSpace_;
-	actionSpaceWidth = actionSpaceWidth_;
-	pose = PxTransform(Pos.x, Pos.y, Pos.z);
-	renderItem = new RenderItem(CreateShape(PxSphereGeometry(tamano)), &pose, color);
+	p.masa = mass_;
+	p.vel = Vel;
+	p.ace = Ace;
+	p.damping = damp;
+	p.lifeTime = lifeTime_;
+	p.destroySpace = dSpace_;
+	p.actionSpace = actionSpace_;
+	p.actionSpaceWidth = actionSpaceWidth_;
+	p.pose = PxTransform(Pos.x, Pos.y, Pos.z);
+	renderItem = new RenderItem(CreateShape(PxSphereGeometry(tamano)), &p.pose, color);
 }

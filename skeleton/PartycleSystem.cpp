@@ -1,6 +1,5 @@
 #include "PartycleSystem.h"
 
-
 PartycleSystem::PartycleSystem()
 {
 
@@ -40,8 +39,13 @@ void PartycleSystem::update(double t)
 
 	while (it != _particles.end()) {
 
+
 		(*it)->integrate(t);
 		if (!(*it)->isAlive()) {
+
+			if (Firework* f = dynamic_cast<Firework*>(*it)){
+				f->Explode();
+			}
 
 			delete* it;
 			it = _particles.erase(it);
@@ -53,4 +57,21 @@ void PartycleSystem::update(double t)
 ParticleGenerator* PartycleSystem::getParticleGenerator(string name)
 {
 	return nullptr;
+}
+
+void PartycleSystem::shootFirework(int type)
+{
+}
+
+void PartycleSystem::OnParticleDeath(Particle* p)
+{
+}
+
+void PartycleSystem::generateFireworkSystem()
+{
+
+	Particle* base_p = new Particle();
+	base_p->setParticle(5, 0.555, 7, { 0,0,1 }, { 0,0,0 }, { 0,-9.8,0 }, { 0,1,1,1 }, 5, { 0,0,0 }, { 0,0,0 }, false);
+
+	std::shared_ptr<ParticleGenerator*> gen1(new GaussianParticleGenerator("gen1", { 0,0,0 }, { 1.3,1.3,1.3 }, 2, 5, 20, 0.95, base_p));
 }
