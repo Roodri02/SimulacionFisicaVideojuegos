@@ -1,7 +1,7 @@
 #include "Particle.h"
 #include <iostream>
-
 using namespace physx;
+
 
 Particle::Particle(Vector3 pos, Vector3 Vel,Vector3 Ace, double damp, double lifeTime_, Vector4 color)
 {
@@ -35,22 +35,32 @@ void Particle::integrate(double t)
 			|| p.pose.p.z > p.actionSpace.z + p.actionSpaceWidth.z / 2 || p.pose.p.z < p.actionSpace.z - p.actionSpaceWidth.z / 2)
 			p.isAlive_ = false;
 	}
-
-
-	std::cout << t << "\n";
 }
 
 void Particle::setParticle(double mass_, double damp, double lifeTime_, Vector3 Vel, Vector3 Pos, Vector3 Ace, Vector4 color,
-	double tamano,Vector3 actionSpace_,Vector3 actionSpaceWidth_,bool dSpace_)
+	double tamano,Vector3 actionSpace_,Vector3 actionSpaceWidth_,bool dSpace_, bool isVisible_)
 {
 	p.masa = mass_;
 	p.vel = Vel;
 	p.ace = Ace;
 	p.damping = damp;
 	p.lifeTime = lifeTime_;
+	p.color = color;
 	p.destroySpace = dSpace_;
+	p.tamano = tamano;
 	p.actionSpace = actionSpace_;
 	p.actionSpaceWidth = actionSpaceWidth_;
 	p.pose = PxTransform(Pos.x, Pos.y, Pos.z);
-	renderItem = new RenderItem(CreateShape(PxSphereGeometry(tamano)), &p.pose, color);
+	p.isVisible = isVisible_;
+	if(p.isVisible)
+		renderItem = new RenderItem(CreateShape(PxSphereGeometry(p.tamano)), &p.pose, p.color);
+}
+
+void Particle::setParticle(Particle* p_)
+{
+
+	ParticleVariables pAux = p_->getVariables();
+	p = pAux;
+	p.pose = PxTransform(pAux.pose.p.x, pAux.pose.p.y, pAux.pose.p.z);
+	renderItem = new RenderItem(CreateShape(PxSphereGeometry(p.tamano)), &p.pose, p.color);
 }

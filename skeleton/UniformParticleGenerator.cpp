@@ -1,27 +1,20 @@
 #include "UniformParticleGenerator.h"
-UniformParticleGenerator::UniformParticleGenerator(string name_,int num_particles_, double generation_probability_,double mean_t_, Vector3 mean_pos_, Vector3 mean_vel_,
-	Vector3 pos_width_, Vector3 vel_widht_, Vector4 color, double mass_, double damp_, double tamanio_, Vector3 ace, Vector3 ambientPos_ , Vector3 ambientWidth_,bool dSpace)
+UniformParticleGenerator::UniformParticleGenerator(string name_,int num_particles_, double generation_probability_,
+	Vector3 pos_width_, Vector3 vel_widht_,Particle* base_p_)
 {
 	name = name_;
 	num_particles = num_particles_;
 	generation_probability = generation_probability_;
-	mean_pos = mean_pos_;
-	mean_vel = mean_vel_;
-	mean_t = mean_t_;
-	color_ = color;
-	mass = mass_;
-	damp = damp_;
-	ace_ = ace;
-	tamanio = tamanio_;
 	pos_width = pos_width_;
 	vel_widht = vel_widht_;
-	ambientPos = ambientPos_;
-	ambientWidth = ambientWidth_;
-	destroySpace = dSpace;
 
 	std::random_device rd{};
 	gen = mt19937{ rd() };
 
+	Vector3 mean_pos = base_p_->getMeanPos();
+	Vector3 mean_vel = base_p_->getMeanVel();
+
+	model = base_p_;
 
 	px = uniform_real_distribution<>{ mean_pos.x - pos_width_.x/2, mean_pos.x + pos_width_.x / 2 };
 	py = uniform_real_distribution<>{ mean_pos.y - pos_width_.y/2, mean_pos.y + pos_width_.y / 2 };
@@ -46,13 +39,10 @@ list<Particle*> UniformParticleGenerator::generateParticles()
 
 		double probability = distr(gen);
 		if (probability < generation_probability) {
-			Particle* particleNew = new Particle();
+			Particle* particleNew = model->clone();
 
 			Vector3 pPos = { float(px(gen)),float(py(gen)),float(pz(gen))};
 			Vector3 vVel = { float(vx(gen)),float(vy(gen)),float(vz(gen)) };
-
-
-			particleNew->setParticle(mass, damp, mean_t, vVel, pPos, ace_, color_, tamanio,ambientPos,ambientWidth,destroySpace);
 
 			particles.push_back(particleNew);
 

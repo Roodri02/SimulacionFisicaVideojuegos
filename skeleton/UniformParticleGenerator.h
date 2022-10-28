@@ -6,15 +6,12 @@ class UniformParticleGenerator : public ParticleGenerator
 {
 
 public: 
-	UniformParticleGenerator(string name_, int num_particles_, double generation_probability_,double mean_t, Vector3 mean_pos_, Vector3 mean_vel_,
-		Vector3 pos_widht, Vector3 vel_widht, Vector4 color, double mass_, double damp_, double tamanio_, Vector3 ace, Vector3 ambientPos_, Vector3 ambientWidth_,bool destroySpace_);
+	UniformParticleGenerator(string name_, int num_particles_, double generation_probability_,
+		Vector3 pos_widht, Vector3 vel_widht, Particle* base_p_);
 	~UniformParticleGenerator();
 
 
 	list<Particle*> generateParticles() override;
-	Vector3 getWidthPos() { return pos_width; };
-	Vector3 getMeanPos() { return mean_pos; };
-
 private:
 
 	std::mt19937 gen;

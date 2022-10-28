@@ -9,9 +9,13 @@ class GaussianParticleGenerator : public ParticleGenerator
 public:
 	GaussianParticleGenerator(string name,Vector3 std_dev_pos_, Vector3 std_dev_vel_, double std_dev_t_,double _mean_t_, int num_particles_ ,
 		double generation_probability_,Particle* p);
+	GaussianParticleGenerator(string name, Vector3 std_dev_pos_, Vector3 std_dev_vel_, Vector3 mean_pos_, Vector3 mean_vel_, double std_dev_t_, double _mean_t_, int num_particles_,
+		double generation_probability_, Particle* p);
+
 	~GaussianParticleGenerator();
 
 	list<Particle*> generateParticles() override;
+
 
 private:
 

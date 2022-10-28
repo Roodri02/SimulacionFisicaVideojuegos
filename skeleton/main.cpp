@@ -67,7 +67,9 @@ void initPhysics(bool interactive)
 
 	partycleSystem = new PartycleSystem();
 
-	}
+	partycleSystem->generateFireworkSystem();
+
+}
 
 
 // Function to configure what happens in each step of physics
@@ -140,12 +142,33 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	}
 	case 'C':
 	{
-		gestorParticulas.push_back(new Proyectil(TipoBala::FIREBALL ));
+		//gestorParticulas.push_back(new Proyectil(TipoBala::FIREBALL ));
+		partycleSystem->addCircleGenerator(0);
 		break;
 	}
 	case 'V':
 	{
-		gestorParticulas.push_back(new Proyectil(TipoBala::SNOWBALL));
+		//gestorParticulas.push_back(new Proyectil(TipoBala::SNOWBALL));
+		partycleSystem->addCircleGenerator(1);
+		break;
+	}
+	case 'T':
+	{
+		partycleSystem->shootFirework(5);
+		break;
+	}
+	case 'Q':
+	{
+		partycleSystem->shootFirework(1);
+		break;
+	}
+	case 'L':
+	{
+		partycleSystem->shootFirework(2);
+		break;
+	}
+	case 'F' : {
+		partycleSystem->addFuente(1);
 		break;
 	}
 
