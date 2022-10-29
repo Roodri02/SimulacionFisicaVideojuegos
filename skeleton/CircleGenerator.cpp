@@ -34,10 +34,9 @@ list<Particle*> CircleGenerator::generateParticles()
 				break;
 			}
 			case 1: {
-				vVel = { float(physx::PxCos(angle) * radio),20,float(physx::PxSin(angle) * radio) };
+				vVel = { float(physx::PxCos(angle) * radio),10,float(physx::PxSin(angle) * radio) };
 				break;
 			}
-
 			default:
 				break;
 			}

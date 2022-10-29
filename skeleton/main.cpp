@@ -131,25 +131,20 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 	case 'Z': 
 	{
-		gestorParticulas.push_back(new Proyectil(TipoBala::PISTOL));
-
+		//gestorParticulas.push_back(new Proyectil(TipoBala::PISTOL));
+		partycleSystem->borraGenerator();
 		break; 
 	}
 	case 'X':
 	{
-		gestorParticulas.push_back(new Proyectil(TipoBala::ARTILLERY));
+		//gestorParticulas.push_back(new Proyectil(TipoBala::ARTILLERY));
+		partycleSystem->addFuente2();
 		break;
 	}
 	case 'C':
 	{
 		//gestorParticulas.push_back(new Proyectil(TipoBala::FIREBALL ));
-		partycleSystem->addCircleGenerator(0);
-		break;
-	}
-	case 'V':
-	{
-		//gestorParticulas.push_back(new Proyectil(TipoBala::SNOWBALL));
-		partycleSystem->addCircleGenerator(1);
+		partycleSystem->addExplosion();
 		break;
 	}
 	case 'T':
@@ -168,7 +163,11 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		break;
 	}
 	case 'F' : {
-		partycleSystem->addFuente(1);
+		partycleSystem->addFuente();
+		break;
+	}
+	case 'N': {
+		partycleSystem->addNiebla();
 		break;
 	}
 

@@ -19,8 +19,12 @@ public:
 	void OnParticleDeath(Particle* p);
 	void generateFireworkSystem();
 	void anadeParticulasFirework(std::list<Particle*> pA);
-	void addFuente(int type);
-	void addCircleGenerator(int type);
+	void addFuente();
+	void addFuente2();
+	void addNiebla();
+	void addExplosion();
+
+	void borraGenerator();
 	
 protected:
 	std::list<Particle*> _particles;

@@ -118,19 +118,58 @@ void PartycleSystem::anadeParticulasFirework(std::list<Particle*> pA)
 
 }
 
-void PartycleSystem::addFuente(int type)
+void PartycleSystem::addFuente()
 {
 
-	Firework* f = new Firework();
-	f->setFireworkBase(fireworks_pool[3]);
+	Particle* base_p = new Particle();
+	base_p->setParticle(5, 0.999, 2, { 0,0,0 }, { 0,0,0 }, { 0,9.8,0 }, { 0.7,.1,0.3,1 }, 0.6, { 0,0,0 }, { 0,0,0 }, false, false);
+	CircleGenerator* c = new CircleGenerator({ 0,0,0 }, 20, 10, 0.9, base_p, 0);
+	_particlesGenerators.push_back(c);
+	Particle* base_p_1 = new Particle();
+	base_p_1->setParticle(5, 0.999, 2, { 0,0,0 }, { 0,0,0 }, { 0,-9.8,0 }, { 0.7,.1,0.3,1 }, 0.6, { 0,0,0 }, { 0,0,0 }, false, false);
+	CircleGenerator* c1 = new CircleGenerator({ 0,0,0 }, 20, 10, 0.9, base_p_1, 0);
+	_particlesGenerators.push_back(c1);
+	Particle* base_p_2 = new Particle();
+	base_p_2->setParticle(5, 0.999, 2, { 0,0,0 }, { 0,0,0 }, { 0,0,0 }, { 0.4,.1,0.3,1 }, 0.6, { 0,0,0 }, { 0,0,0 }, false, false);
+	CircleGenerator* c2 = new CircleGenerator({ 0,0,0 }, 20, 10, 0.9, base_p_2, 0);
+	_particlesGenerators.push_back(c2);
 
-	GaussianParticleGenerator* g = new GaussianParticleGenerator("fuente",{0.05,0.1,0.05 }, { 0.1, 0.1, 0.1 },{0,0,0},{0,-3,0}, 0.05, 4, 1, 0.9, f);
+}
+
+
+void PartycleSystem::addFuente2()
+{
+
+	Particle* base_p = new Particle();
+	base_p->setParticle(5, 0.999, 2, { 0,0,0 }, { 0,0,0 }, { 0,-9.8,0 }, { 0.7,.1,0.3,1 }, 0.6, { 0,0,0 }, { 0,0,0 }, false, false);
+	CircleGenerator* c = new CircleGenerator({ 0,0,0 }, 20, 10, 0.9, base_p, 1);
+	_particlesGenerators.push_back(c);
+
+}
+
+void PartycleSystem::addNiebla()
+{
+	Particle* base_p = new Particle();
+	base_p->setParticle(5, 0.555, 0.05, { 0,0,0 }, { 0,0,0 }, { 0,0,0 }, { 0.7,.1,0.3,1 }, 0.3, { 0,0,0 }, { 5,5,5 }, true, false);
+	GaussianParticleGenerator* g = new GaussianParticleGenerator("xd", { 10, 10, 10 }, { 2,2,2 },{0,0,0},{0,0,0}, 2, 8, 10, 0.9, base_p);
+	_particlesGenerators.push_back(g);
+
+
+}
+
+void PartycleSystem::addExplosion()
+{
+	Particle* base_p = new Particle();
+	base_p->setParticle(5, 0.555, 0.05, { 0,0,1 }, { 0,0,0 }, { 0,-0.5,0 }, { 1,1,1,1 }, 0.3, { 20,20,0 }, { 0,0,0 }, false, false);
+	GaussianParticleGenerator* g = new GaussianParticleGenerator("xd", { 0.2, .2, .2 }, { 20,20,20 },{0,0,0},{0,30,0}, .1, 10, 20, 0.9, base_p);
 	_particlesGenerators.push_back(g);
 
 }
 
-void PartycleSystem::addCircleGenerator(int type)
+void PartycleSystem::borraGenerator()
 {
-
-
+	auto it = _particlesGenerators.begin();
+	while (_particlesGenerators.size() != 0) {
+		it = _particlesGenerators.erase(it);
+	}
 }
