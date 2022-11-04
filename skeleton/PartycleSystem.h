@@ -4,8 +4,10 @@
 #include "GaussianParticleGenerator.h"
 #include "UniformParticleGenerator.h"
 #include "CircleGenerator.h"
+#include "GravityForceGenerator.h"
+#include "ParticleForceRegistry.h"
 
-
+enum tipoFuerza { GRAVITY_FORCE, DRAG_FORCE };
 
 class PartycleSystem {
 
@@ -19,6 +21,9 @@ public:
 	void OnParticleDeath(Particle* p);
 	void generateFireworkSystem();
 	void anadeParticulasFirework(std::list<Particle*> pA);
+	
+	void addForceGenerator(int type);
+	
 	void addFuente();
 	void addFuente2();
 	void addNiebla();
@@ -33,6 +38,7 @@ protected:
 
 	std::vector<Firework*> fireworks_pool;
 	ParticleGenerator* firework_gen;
+	ParticleForceRegistry* PFR;
 
 };
 

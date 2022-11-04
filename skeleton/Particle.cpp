@@ -26,8 +26,25 @@ void Particle::integrate(double t)
 	p.lifeTime -= t;
 	if (p.lifeTime < 0)
 		p.isAlive_ = false;
+
+
+
+
+	if (1/p.masa <= 0.0f) return;
+
 	p.pose.p = p.pose.p + p.vel * t;
-	p.vel = p.vel * pow(p.damping, t) + p.ace * t;
+
+	Vector3 totalAcceleration = p.ace; 
+	totalAcceleration += p.force * (1/p.masa);
+
+	p.vel += totalAcceleration * t;
+	p.vel = p.vel * powf(p.damping, t);
+
+	clearForce();
+
+
+
+
 
 	if (p.destroySpace) {
 		if (p.pose.p.x > p.actionSpace.x + p.actionSpaceWidth.x / 2 || p.pose.p.x < p.actionSpace.x - p.actionSpaceWidth.x / 2
@@ -63,4 +80,13 @@ void Particle::setParticle(Particle* p_)
 	p = pAux;
 	p.pose = PxTransform(pAux.pose.p.x, pAux.pose.p.y, pAux.pose.p.z);
 	renderItem = new RenderItem(CreateShape(PxSphereGeometry(p.tamano)), &p.pose, p.color);
+}
+
+
+void Particle::clearForce() {
+	p.force *= 0; 
+}
+
+void Particle::addForce(const Vector3& f) {
+	p.force += f; 
 }

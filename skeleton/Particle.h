@@ -16,6 +16,7 @@ struct ParticleVariables {
 	bool isAlive_ = true, destroySpace=false;
 	physx::PxTransform pose;
 	bool isVisible=true;
+	Vector3 force;
 };
 
 
@@ -53,10 +54,16 @@ public:
 		pA->setParticle(this);
 		return pA;
 	};
+
+	// Clears accumulated force
+	void clearForce();
+	// Add force to apply in next integration only
+	void addForce(const Vector3& f);
 	
 protected:
 
 	RenderItem* renderItem;
 	ParticleVariables p;
+
 };
 

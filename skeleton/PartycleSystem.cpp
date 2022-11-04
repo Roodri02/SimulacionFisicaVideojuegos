@@ -24,6 +24,8 @@ PartycleSystem::PartycleSystem()
 
 	//g = new GaussianParticleGenerator("fuente4", { 0.2, .2, .2 }, { .2,.1,0.1 }, 2, 5, 1, 0.9, { 25,50,0 }, { 0,10,5 }, { 1,1,0,1 });
 	//_particlesGenerators.push_back(g);
+
+	PFR = new ParticleForceRegistry();
 }
 
 PartycleSystem::~PartycleSystem()
@@ -116,6 +118,23 @@ void PartycleSystem::anadeParticulasFirework(std::list<Particle*> pA)
 	for (auto i : pA)
 		_particles.push_back(i);
 
+}
+
+void PartycleSystem::addForceGenerator(int type)
+{
+	switch (type)
+	{
+	case GRAVITY_FORCE: {
+		GravityForceGenerator*g = new GravityForceGenerator({0,5,0});
+		PFR->addRegistry(g,)
+		break;
+	}
+	case DRAG_FORCE: {
+		break;
+	}
+	default:
+		break;
+	}
 }
 
 void PartycleSystem::addFuente()
