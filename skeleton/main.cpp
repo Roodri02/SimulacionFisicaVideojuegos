@@ -148,6 +148,10 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		partycleSystem->addExplosion();
 		break;
 	}
+	case 'J': {
+		partycleSystem->addGravityGenerator();
+		break;
+	}
 	case 'T':
 	{
 		partycleSystem->shootFirework(5);

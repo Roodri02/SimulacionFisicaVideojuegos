@@ -28,6 +28,9 @@ public:
 	void addNiebla();
 	void addExplosion();
 
+
+
+	void addGravityGenerator();
 	void borraGenerator();
 	
 protected:

@@ -25,7 +25,7 @@ PartycleSystem::PartycleSystem()
 	//g = new GaussianParticleGenerator("fuente4", { 0.2, .2, .2 }, { .2,.1,0.1 }, 2, 5, 1, 0.9, { 25,50,0 }, { 0,10,5 }, { 1,1,0,1 });
 	//_particlesGenerators.push_back(g);
 
-	PFR = new ParticleForceRegistry();
+	PFR =  ParticleForceRegistry();
 }
 
 PartycleSystem::~PartycleSystem()
@@ -174,6 +174,15 @@ void PartycleSystem::addExplosion()
 	GaussianParticleGenerator* g = new GaussianParticleGenerator("xd", { 0.2, .2, .2 }, { 20,20,20 },{0,0,0},{0,30,0}, .1, 10, 20, 0.9, base_p);
 	_particlesGenerators.push_back(g);
 
+}
+
+void PartycleSystem::addGravityGenerator()
+{
+
+	Particle* p = new Particle();
+	p->setParticle(0.2, 0.98, 5, { 0,70,0 }, { 0,0,50 }, { 0,0,0 }, { 1,1,0,1 }, 3, { 0,0,0 }, { 0,0,0 }, false, false);
+	GravityForceGenerator* g = new GravityForceGenerator({ 0,-10,0 });
+	addForceGenerator(p, g);
 }
 
 void PartycleSystem::borraGenerator()

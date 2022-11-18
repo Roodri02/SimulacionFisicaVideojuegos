@@ -2,6 +2,7 @@
 
 GravityForceGenerator::GravityForceGenerator(const Vector3& g)
 {
+	_gravity = g;
 }
 
 void GravityForceGenerator::updateForce(Particle* particle, double t)
