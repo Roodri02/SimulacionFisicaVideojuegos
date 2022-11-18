@@ -219,7 +219,7 @@ void PartycleSystem::addWindGenerator()
 	p->setParticle(4, 0.9, 50, Vector3(0, 0, 0), Vector3(0, 0, 0),
 		Vector3(0, 0, 0), { 1,1,1,1 }, 0.5, { 0,40,0 }, { 10,10,10 }, false, false);
 
-	gen = new UniformParticleGenerator("g",10,0.98, Vector3(10, 10, 10), Vector3(3, 3, 3),p,WindForce);
+	gen = new UniformParticleGenerator("g",10,0.98, Vector3(10, 10, 10), Vector3(3, 3, 3),p,WhirlwindForce);
 	gen->setMeanPos(Vector3(15, 30, 0), { 0,0,0 });
 	_particlesGenerators.push_back(gen);
 }

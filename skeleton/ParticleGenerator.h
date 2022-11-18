@@ -30,7 +30,7 @@ public:
 			fg = new WindGenerator(2, 0.3, { 0,0,5 });
 			break;
 		case WhirlwindForce:
-			fg = new WhirlwindGenerator(-10, { 15,30,0 });
+			fg = new WhirlwindGenerator(10, { 0,30,0 });
 			break;
 		default:
 			break;

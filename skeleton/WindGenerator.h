@@ -14,8 +14,8 @@ public:
 
 
 protected:
-	float _k1;
-	float _k2;
+	float _k1=0;
+	float _k2=0;
 	Vector3 windVel;
 
 	double const cD = 0.5;
