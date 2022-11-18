@@ -30,6 +30,7 @@ public:
 	void addExplosion();
 	void addExplosion1();
 
+	void addParticles(int numParticles);
 
 	void addGravityGenerator();	
 	void addWindGenerator();

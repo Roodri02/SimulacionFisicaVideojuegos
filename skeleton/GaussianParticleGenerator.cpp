@@ -18,7 +18,7 @@ GaussianParticleGenerator::GaussianParticleGenerator(string name_,Vector3 std_de
 
 	 typeForce_ = T;
 
-	 setForceClon();
+	 setForceGenerator();
 
 	distr = std::uniform_real_distribution<double>(0, 1);
 }
@@ -42,7 +42,7 @@ GaussianParticleGenerator::GaussianParticleGenerator(string name, Vector3 std_de
 
 	typeForce_ = T;
 
-	setForceClon();
+	setForceGenerator();
 
 	distr = std::uniform_real_distribution<double>(0, 1);
 }

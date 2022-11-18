@@ -189,12 +189,30 @@ void PartycleSystem::addExplosion1()
 {
 
 	if (_particles.size() > 0) {
-		exp = new ExplosionGenerator(200, 200, 100, { 0, 0, 0 });
+		exp = new ExplosionGenerator(400, 400, 200, { 0, 0, 0 });
 		explosion = true;
 	}
 
 	for (auto i : _particles) {
 		PFR->addRegistry(exp, i);
+	}
+}
+
+void PartycleSystem::addParticles(int numParticles)
+{
+	for (int i = 0; i < numParticles; i++) {
+		double masa = 1 + rand() % (200 - 15);
+		float x = rand() % 101, z = rand() % 101;;
+
+		vector<int> dir = { -1, 1 };
+
+		int aux1 = rand() % 2;
+		int aux2 = rand() % 2;
+
+		Particle* p = new Particle();
+		p->setParticle(masa, 0.8, 40, { 0,0,0 }, { dir[aux1]*x,0,dir[aux2]*z }, { 0,0,0 }, { 1,0.3,1,1 }, 0.5, { 0,0,0 }, { 0,0,0 }, false, true);
+
+		_particles.push_back(p);
 	}
 }
 
@@ -206,7 +224,7 @@ void PartycleSystem::addGravityGenerator()
 	p->setParticle(10, 0.8, 100, Vector3(0, 0, 0), Vector3(0, 0, 0),
 		Vector3(0, 0, 0), { 1,0,1,1 }, 0.5, { 0,0,0 }, { 0,0,0 }, false, false);
 
-	gen = new GaussianParticleGenerator("g", Vector3(0.1, 0.1, 10), Vector3(0.1, 0.1, 0.1),{0,0,0},{0,0,0}, 0.3, 2, 1, 0.8, p);
+	gen = new GaussianParticleGenerator("g", Vector3(0.1, 0.1, 10), Vector3(0.1, 0.1, 0.1),{0,0,0},{0,0,0}, 0.3, 100, 1, 0.8, p,WhirlwindForce);
 	gen->setMeanPos(Vector3(15, 40, 0) , {0,0,0});
 	_particlesGenerators.push_back(gen);
 }

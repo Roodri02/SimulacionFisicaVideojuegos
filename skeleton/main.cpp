@@ -154,9 +154,11 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		partycleSystem->addWindGenerator();
 		break;
 	}
+
 	case 'T':
 	{
-		partycleSystem->shootFirework(5);
+		//partycleSystem->shootFirework(5);
+		partycleSystem->addParticles(20);
 		break;
 	}
 	case 'Q':

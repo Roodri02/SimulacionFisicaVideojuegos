@@ -18,7 +18,7 @@ UniformParticleGenerator::UniformParticleGenerator(string name_,int num_particle
 
 	typeForce_ = T;
 
-	setForceClon();
+	setForceGenerator();
 
 	px = uniform_real_distribution<>{ mean_pos.x - pos_width_.x/2, mean_pos.x + pos_width_.x / 2 };
 	py = uniform_real_distribution<>{ mean_pos.y - pos_width_.y/2, mean_pos.y + pos_width_.y / 2 };

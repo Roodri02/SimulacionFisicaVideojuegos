@@ -4,7 +4,9 @@ class WhirlwindGenerator :public WindGenerator
 {
 public:
 
-	WhirlwindGenerator(double K_, Vector3 WhirlwindPos_) {
+	WhirlwindGenerator(double k1,double k2,double K_, Vector3 WhirlwindPos_) {
+		_k1 = k1;
+		_k2 = k2;
 		K = K_;
 		WhirlwindPos = WhirlwindPos_;
 	};
