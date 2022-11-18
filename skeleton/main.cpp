@@ -33,6 +33,7 @@ PxPvd*                  gPvd        = NULL;
 PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 
+
 std::vector<Proyectil*> gestorParticulas;
 PartycleSystem* partycleSystem;
 

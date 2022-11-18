@@ -22,8 +22,7 @@ public:
 	void generateFireworkSystem();
 	void anadeParticulasFirework(std::list<Particle*> pA);
 	
-	void addForceGenerator(int type);
-	
+	void addForceGenerator(Particle* p, ForceGenerator* fg);
 	void addFuente();
 	void addFuente2();
 	void addNiebla();
@@ -38,7 +37,7 @@ protected:
 
 	std::vector<Firework*> fireworks_pool;
 	ParticleGenerator* firework_gen;
-	ParticleForceRegistry* PFR;
+	ParticleForceRegistry PFR;
 
 };
 

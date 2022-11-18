@@ -23,14 +23,13 @@ Particle::~Particle() {
 
 void Particle::integrate(double t)
 {
+
+	if (1 / p.masa <= 0.0f) return;
+
+
 	p.lifeTime -= t;
 	if (p.lifeTime < 0)
 		p.isAlive_ = false;
-
-
-
-
-	if (1/p.masa <= 0.0f) return;
 
 	p.pose.p = p.pose.p + p.vel * t;
 

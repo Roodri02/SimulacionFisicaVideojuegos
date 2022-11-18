@@ -41,6 +41,9 @@ void PartycleSystem::update(double t)
 			_particles.push_back(p);
 	}
 
+	PFR.updateForces(t);
+
+
 	list<Particle*>::iterator it = _particles.begin();
 
 	while (it != _particles.end()) {
@@ -120,21 +123,9 @@ void PartycleSystem::anadeParticulasFirework(std::list<Particle*> pA)
 
 }
 
-void PartycleSystem::addForceGenerator(int type)
+void PartycleSystem::addForceGenerator(Particle* p, ForceGenerator* fg)
 {
-	switch (type)
-	{
-	case GRAVITY_FORCE: {
-		GravityForceGenerator*g = new GravityForceGenerator({0,5,0});
-		PFR->addRegistry(g,)
-		break;
-	}
-	case DRAG_FORCE: {
-		break;
-	}
-	default:
-		break;
-	}
+	PFR.addRegistry(fg, p);
 }
 
 void PartycleSystem::addFuente()
