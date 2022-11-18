@@ -4,21 +4,21 @@ class ExplosionGenerator : public ForceGenerator
 {
 public:
 
-	ExplosionGenerator() {};
+	ExplosionGenerator(double K_, double radio_, double explosion_, Vector3 center_) {
+		K = K_;
+		center = center_;
+		radio = radio_;
+		explosion = explosion_;
+	};
+
 	virtual void updateForce(Particle* p, double t);
-	void setIntensidad(float i) { intensidad = i; }
-	void setTime(float t) { timeCt = t; }
-	void setCenter(Vector3 eC) { center = eC; }
-	void setRadio(float r) { radio = r; }
-	void setAll(float i, float t, Vector3 e, float r)
-	{
-		intensidad = i;
-		timeCt = t;
-		center = e;
-		radio = r;
+	void addConst(double t) {
+		explosion += t;
+		radio = vE * t * 100;
 	}
 protected:
-	float _k1, _k2, intensidad, radio;
-	float timeCt;
+	double K, radio, explosion;
+	double const e = 2.71828182845904525356;
+	double vE = 343.55489;
 	Vector3 center;
 };

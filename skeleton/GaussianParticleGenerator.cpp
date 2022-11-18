@@ -1,7 +1,7 @@
 #include "GaussianParticleGenerator.h"
 #include "Firework.h"
 GaussianParticleGenerator::GaussianParticleGenerator(string name_,Vector3 std_dev_pos_, Vector3 std_dev_vel_, double std_dev_t_,
-	double _mean_t_, int num_particles_, double generation_probability_,Particle* base_p_)
+	double _mean_t_, int num_particles_, double generation_probability_,Particle* base_p_, typeForce T)
 {
 	name = name_;
 	std_dev_pos = std_dev_pos_;
@@ -16,11 +16,15 @@ GaussianParticleGenerator::GaussianParticleGenerator(string name_,Vector3 std_de
 	std::random_device rd{};
 	 gen = mt19937{rd()};
 
+	 typeForce_ = T;
+
+	 setForceClon();
 
 	distr = std::uniform_real_distribution<double>(0, 1);
 }
 
-GaussianParticleGenerator::GaussianParticleGenerator(string name, Vector3 std_dev_pos_, Vector3 std_dev_vel_, Vector3 mean_pos_, Vector3 mean_vel_, double std_dev_t_, double _mean_t_, int num_particles_, double generation_probability_, Particle* p)
+GaussianParticleGenerator::GaussianParticleGenerator(string name, Vector3 std_dev_pos_, Vector3 std_dev_vel_,
+	Vector3 mean_pos_, Vector3 mean_vel_, double std_dev_t_, double _mean_t_, int num_particles_, double generation_probability_, Particle* p, typeForce T)
 {
 	name = name;
 	std_dev_pos = std_dev_pos_;
@@ -36,6 +40,9 @@ GaussianParticleGenerator::GaussianParticleGenerator(string name, Vector3 std_de
 	std::random_device rd{};
 	gen = mt19937{ rd() };
 
+	typeForce_ = T;
+
+	setForceClon();
 
 	distr = std::uniform_real_distribution<double>(0, 1);
 }

@@ -30,7 +30,8 @@ public:
 
 
 
-	void addGravityGenerator();
+	void addGravityGenerator();	
+	void addWindGenerator();
 	void borraGenerator();
 	
 protected:
@@ -40,7 +41,7 @@ protected:
 
 	std::vector<Firework*> fireworks_pool;
 	ParticleGenerator* firework_gen;
-	ParticleForceRegistry PFR;
+	ParticleForceRegistry* PFR;
 
 };
 

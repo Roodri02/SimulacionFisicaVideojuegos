@@ -7,7 +7,7 @@ class UniformParticleGenerator : public ParticleGenerator
 
 public: 
 	UniformParticleGenerator(string name_, int num_particles_, double generation_probability_,
-		Vector3 pos_widht, Vector3 vel_widht, Particle* base_p_);
+		Vector3 pos_widht, Vector3 vel_widht, Particle* base_p_,typeForce T = GravityForce);
 	~UniformParticleGenerator();
 
 

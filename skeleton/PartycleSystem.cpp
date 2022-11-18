@@ -25,7 +25,7 @@ PartycleSystem::PartycleSystem()
 	//g = new GaussianParticleGenerator("fuente4", { 0.2, .2, .2 }, { .2,.1,0.1 }, 2, 5, 1, 0.9, { 25,50,0 }, { 0,10,5 }, { 1,1,0,1 });
 	//_particlesGenerators.push_back(g);
 
-	PFR =  ParticleForceRegistry();
+	PFR =  new ParticleForceRegistry();
 }
 
 PartycleSystem::~PartycleSystem()
@@ -34,18 +34,7 @@ PartycleSystem::~PartycleSystem()
 
 void PartycleSystem::update(double t)
 {
-	list<Particle*> aux;
-	for (auto g : _particlesGenerators) {
-		aux = g->generateParticles();
-		for (auto p : aux)
-			_particles.push_back(p);
-	}
-
-	PFR.updateForces(t);
-
-
 	list<Particle*>::iterator it = _particles.begin();
-
 	while (it != _particles.end()) {
 		(*it)->integrate(t);
 		if (!(*it)->isAlive()) {
@@ -57,12 +46,29 @@ void PartycleSystem::update(double t)
 				for (auto i : pAux)
 					_particles.push_back(i);
 			}
+			PFR->deleteParticleRegistry(*it);
 			delete* it;
 			it = _particles.erase(it);
 
 		}
 		else it++;
 	}
+
+	PFR->updateForces(t);
+
+	list<Particle*> aux;
+	for (auto g : _particlesGenerators) {
+		aux = g->generateParticles();
+		for (auto p : aux) {
+			PFR->addRegistry(g->getForceGenerator(), p);
+			_particles.push_back(p);
+		}
+	}
+
+
+
+
+
 
 }
 
@@ -125,7 +131,7 @@ void PartycleSystem::anadeParticulasFirework(std::list<Particle*> pA)
 
 void PartycleSystem::addForceGenerator(Particle* p, ForceGenerator* fg)
 {
-	PFR.addRegistry(fg, p);
+	PFR->addRegistry(fg, p);
 }
 
 void PartycleSystem::addFuente()
@@ -170,7 +176,7 @@ void PartycleSystem::addNiebla()
 void PartycleSystem::addExplosion()
 {
 	Particle* base_p = new Particle();
-	base_p->setParticle(5, 0.555, 0.05, { 0,0,1 }, { 0,0,0 }, { 0,-0.5,0 }, { 1,1,1,1 }, 0.3, { 20,20,0 }, { 0,0,0 }, false, false);
+	base_p->setParticle(5, 0.555, 10, { 0,0,1 }, { 0,0,0 }, { 0,-0.5,0 }, { 1,1,1,1 }, 0.3, { 20,20,0 }, { 0,0,0 }, false, false);
 	GaussianParticleGenerator* g = new GaussianParticleGenerator("xd", { 0.2, .2, .2 }, { 20,20,20 },{0,0,0},{0,30,0}, .1, 10, 20, 0.9, base_p);
 	_particlesGenerators.push_back(g);
 
@@ -178,11 +184,28 @@ void PartycleSystem::addExplosion()
 
 void PartycleSystem::addGravityGenerator()
 {
-
 	Particle* p = new Particle();
-	p->setParticle(0.2, 0.98, 5, { 0,70,0 }, { 0,0,50 }, { 0,0,0 }, { 1,1,0,1 }, 3, { 0,0,0 }, { 0,0,0 }, false, false);
-	GravityForceGenerator* g = new GravityForceGenerator({ 0,-10,0 });
-	addForceGenerator(p, g);
+	ParticleGenerator* gen;
+
+	p->setParticle(10, 0.8, 100, Vector3(0, 0, 0), Vector3(0, 0, 0),
+		Vector3(0, 0, 0), { 1,0,1,1 }, 0.5, { 0,0,0 }, { 0,0,0 }, false, false);
+
+	gen = new GaussianParticleGenerator("g", Vector3(0.1, 0.1, 10), Vector3(0.1, 0.1, 0.1),{0,0,0},{0,0,0}, 0.3, 2, 1, 0.8, p);
+	gen->setMeanPos(Vector3(15, 40, 0) , {0,0,0});
+	_particlesGenerators.push_back(gen);
+}
+
+void PartycleSystem::addWindGenerator()
+{
+	Particle* p = new Particle();
+	ParticleGenerator* gen;
+
+	p->setParticle(4, 0.9, 50, Vector3(0, 0, 0), Vector3(0, 0, 0),
+		Vector3(0, 0, 0), { 1,1,1,1 }, 0.5, { 0,40,0 }, { 10,10,10 }, false, false);
+
+	gen = new UniformParticleGenerator("g",10,0.98, Vector3(10, 10, 10), Vector3(3, 3, 3),p,WindForce);
+	gen->setMeanPos(Vector3(15, 30, 0), { 0,0,0 });
+	_particlesGenerators.push_back(gen);
 }
 
 void PartycleSystem::borraGenerator()

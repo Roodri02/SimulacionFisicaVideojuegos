@@ -16,7 +16,7 @@ struct ParticleVariables {
 	bool isAlive_ = true, destroySpace=false;
 	physx::PxTransform pose;
 	bool isVisible=true;
-	Vector3 force;
+	Vector3 force={0,0,0};
 };
 
 

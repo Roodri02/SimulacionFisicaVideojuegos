@@ -28,7 +28,7 @@ void Particle::integrate(double t)
 
 
 	p.lifeTime -= t;
-	if (p.lifeTime < 0)
+	if (p.lifeTime < 0) 
 		p.isAlive_ = false;
 
 	p.pose.p = p.pose.p + p.vel * t;
@@ -40,9 +40,6 @@ void Particle::integrate(double t)
 	p.vel = p.vel * powf(p.damping, t);
 
 	clearForce();
-
-
-
 
 
 	if (p.destroySpace) {

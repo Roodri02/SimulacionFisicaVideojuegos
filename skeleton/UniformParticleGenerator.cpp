@@ -1,6 +1,6 @@
 #include "UniformParticleGenerator.h"
 UniformParticleGenerator::UniformParticleGenerator(string name_,int num_particles_, double generation_probability_,
-	Vector3 pos_width_, Vector3 vel_widht_,Particle* base_p_)
+	Vector3 pos_width_, Vector3 vel_widht_,Particle* base_p_, typeForce T)
 {
 	name = name_;
 	num_particles = num_particles_;
@@ -15,6 +15,10 @@ UniformParticleGenerator::UniformParticleGenerator(string name_,int num_particle
 	Vector3 mean_vel = base_p_->getMeanVel();
 
 	model = base_p_;
+
+	typeForce_ = T;
+
+	setForceClon();
 
 	px = uniform_real_distribution<>{ mean_pos.x - pos_width_.x/2, mean_pos.x + pos_width_.x / 2 };
 	py = uniform_real_distribution<>{ mean_pos.y - pos_width_.y/2, mean_pos.y + pos_width_.y / 2 };
@@ -44,6 +48,7 @@ list<Particle*> UniformParticleGenerator::generateParticles()
 			Vector3 pPos = { float(px(gen)),float(py(gen)),float(pz(gen))};
 			Vector3 vVel = { float(vx(gen)),float(vy(gen)),float(vz(gen)) };
 
+			particleNew->setPosAndVel(pPos,vVel);
 			particles.push_back(particleNew);
 
 

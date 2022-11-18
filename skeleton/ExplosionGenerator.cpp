@@ -6,24 +6,24 @@ void ExplosionGenerator::updateForce(Particle* p, double t)
 
 	if (fabs(1/p->getVariables().masa) < 1e-10)return;
 
-	float r = sqrt(pow(p->getMeanPos().x - center.x, 2)
+	Vector3 forceDir{ 0,0,0 };
+	Vector3 force;
+
+	float r = pow(p->getMeanPos().x - center.x, 2)
 		+ pow((p->getMeanPos().y - center.y), 2)
-		+ pow((p->getMeanPos().z - center.z), 2));
+		+ pow((p->getMeanPos().z - center.z), 2);
+
 	if (r < radio)
 	{
-		float result = intensidad / pow(r, 2);
-		Vector3 force{ result * (p->getMeanPos().x - center.x)
-		 ,result * (p->getMeanPos().y - center.y)
-		 ,result * (p->getMeanPos().z - center.z)
-		};
-		force *= exp(-(t / timeCt));
-		p->addForce(force);
+		double a = K / pow(r, 2);
+		double b = pow(e, -(t / explosion));
+
+		forceDir = a * Vector3(p->getMeanPos().x - center.x, p->getMeanPos().y - center.y,
+			p->getMeanPos().z - center.z) * b;
+
 	}
-	else
-	{
-		Vector3 force{ 0,0,0 };
-		p->addForce(force);
-	}
+
+	p->addForce(forceDir * p->getVariables().masa);
 
 
 
