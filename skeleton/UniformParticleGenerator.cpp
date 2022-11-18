@@ -1,6 +1,7 @@
 #include "UniformParticleGenerator.h"
 UniformParticleGenerator::UniformParticleGenerator(string name_,int num_particles_, double generation_probability_,
-	Vector3 pos_width_, Vector3 vel_widht_,Particle* base_p_, typeForce T)
+	Vector3 pos_width_, Vector3 vel_widht_,Particle* base_p_, typeForce T, double k1 , double k2, double K , Vector3 gravity 
+	, Vector3 windVel , Vector3 whirlPos)
 {
 	name = name_;
 	num_particles = num_particles_;
@@ -18,7 +19,7 @@ UniformParticleGenerator::UniformParticleGenerator(string name_,int num_particle
 
 	typeForce_ = T;
 
-	setForceGenerator();
+	setForceGenerator(gravity, k1, k2, windVel, K, whirlPos);
 
 	px = uniform_real_distribution<>{ mean_pos.x - pos_width_.x/2, mean_pos.x + pos_width_.x / 2 };
 	py = uniform_real_distribution<>{ mean_pos.y - pos_width_.y/2, mean_pos.y + pos_width_.y / 2 };

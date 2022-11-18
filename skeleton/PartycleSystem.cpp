@@ -185,7 +185,7 @@ void PartycleSystem::addExplosion()
 }
 
 
-void PartycleSystem::addExplosion1()
+void PartycleSystem::addExplosionEffect()
 {
 
 	if (_particles.size() > 0) {
@@ -216,7 +216,7 @@ void PartycleSystem::addParticles(int numParticles)
 	}
 }
 
-void PartycleSystem::addGravityGenerator()
+void PartycleSystem::addGaussianGenerator(typeForce type)
 {
 	Particle* p = new Particle();
 	ParticleGenerator* gen;
@@ -224,12 +224,12 @@ void PartycleSystem::addGravityGenerator()
 	p->setParticle(10, 0.8, 100, Vector3(0, 0, 0), Vector3(0, 0, 0),
 		Vector3(0, 0, 0), { 1,0,1,1 }, 0.5, { 0,0,0 }, { 0,0,0 }, false, false);
 
-	gen = new GaussianParticleGenerator("g", Vector3(0.1, 0.1, 10), Vector3(0.1, 0.1, 0.1),{0,0,0},{0,0,0}, 0.3, 100, 1, 0.8, p,WhirlwindForce);
+	gen = new GaussianParticleGenerator("g", Vector3(0.1, 0.1, 10), Vector3(0.1, 0.1, 0.1),{0,0,0},{0,0,0}, 0.3, 100, 1, 0.8, p,type);
 	gen->setMeanPos(Vector3(15, 40, 0) , {0,0,0});
 	_particlesGenerators.push_back(gen);
 }
 
-void PartycleSystem::addWindGenerator()
+void PartycleSystem::addUniformGenerator(typeForce type)
 {
 	Particle* p = new Particle();
 	ParticleGenerator* gen;
@@ -237,7 +237,20 @@ void PartycleSystem::addWindGenerator()
 	p->setParticle(4, 0.9, 50, Vector3(0, 0, 0), Vector3(0, 0, 0),
 		Vector3(0, 0, 0), { 1,1,1,1 }, 0.5, { 0,40,0 }, { 10,10,10 }, false, false);
 
-	gen = new UniformParticleGenerator("g",10,0.98, Vector3(10, 10, 10), Vector3(3, 3, 3),p,WhirlwindForce);
+	gen = new UniformParticleGenerator("g",10,0.98, Vector3(10, 10, 10), Vector3(3, 3, 3),p,type);
+	gen->setMeanPos(Vector3(15, 30, 0), { 0,0,0 });
+	_particlesGenerators.push_back(gen);
+}
+
+void PartycleSystem::addCircleGenerator(typeForce type)
+{
+	Particle* p = new Particle();
+	ParticleGenerator* gen;
+
+	p->setParticle(4, 0.9, 50, Vector3(0, 0, 0), Vector3(0, 0, 0),
+		Vector3(0, 0, 0), { 1,1,1,1 }, 0.5, { 0,40,0 }, { 10,10,10 }, false, false);
+
+	gen = new CircleGenerator({ 0,0,0 }, 10, 10, 0.9, p, 0,type);
 	gen->setMeanPos(Vector3(15, 30, 0), { 0,0,0 });
 	_particlesGenerators.push_back(gen);
 }

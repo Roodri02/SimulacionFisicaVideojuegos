@@ -1,7 +1,8 @@
 #include "GaussianParticleGenerator.h"
 #include "Firework.h"
 GaussianParticleGenerator::GaussianParticleGenerator(string name_,Vector3 std_dev_pos_, Vector3 std_dev_vel_, double std_dev_t_,
-	double _mean_t_, int num_particles_, double generation_probability_,Particle* base_p_, typeForce T)
+	double _mean_t_, int num_particles_, double generation_probability_,Particle* base_p_, typeForce T, double k1 , double k2, double K , Vector3 gravity 
+	, Vector3 windVel, Vector3 whirlPos)
 {
 	name = name_;
 	std_dev_pos = std_dev_pos_;
@@ -18,13 +19,15 @@ GaussianParticleGenerator::GaussianParticleGenerator(string name_,Vector3 std_de
 
 	 typeForce_ = T;
 
-	 setForceGenerator();
+	 setForceGenerator(gravity,k1,k2,windVel,K,whirlPos);
 
 	distr = std::uniform_real_distribution<double>(0, 1);
 }
 
 GaussianParticleGenerator::GaussianParticleGenerator(string name, Vector3 std_dev_pos_, Vector3 std_dev_vel_,
-	Vector3 mean_pos_, Vector3 mean_vel_, double std_dev_t_, double _mean_t_, int num_particles_, double generation_probability_, Particle* p, typeForce T)
+	Vector3 mean_pos_, Vector3 mean_vel_, double std_dev_t_, double _mean_t_, int num_particles_, double generation_probability_, Particle* p, typeForce T,
+	double k1 , double k2, double K , Vector3 gravity
+	, Vector3 windVel, Vector3 whirlPos)
 {
 	name = name;
 	std_dev_pos = std_dev_pos_;
@@ -42,7 +45,7 @@ GaussianParticleGenerator::GaussianParticleGenerator(string name, Vector3 std_de
 
 	typeForce_ = T;
 
-	setForceGenerator();
+	setForceGenerator(gravity, k1, k2, windVel, K, whirlPos);
 
 	distr = std::uniform_real_distribution<double>(0, 1);
 }

@@ -28,12 +28,13 @@ public:
 	void addFuente2();
 	void addNiebla();
 	void addExplosion();
-	void addExplosion1();
+	void addExplosionEffect();
 
 	void addParticles(int numParticles);
 
-	void addGravityGenerator();	
-	void addWindGenerator();
+	void addGaussianGenerator(typeForce t=GravityForce);
+	void addUniformGenerator(typeForce t = GravityForce);
+	void addCircleGenerator(typeForce t = GravityForce);
 	void borraGenerator();
 	
 protected:

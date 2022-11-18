@@ -140,21 +140,24 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 		//gestorParticulas.push_back(new Proyectil(TipoBala::ARTILLERY));
 		//partycleSystem->addFuente2();
-		partycleSystem->addExplosion1();
+		partycleSystem->addExplosionEffect();
 		break;
 	}
 	case 'C':
 	{
 		//gestorParticulas.push_back(new Proyectil(TipoBala::FIREBALL ));
 		//partycleSystem->addExplosion();
-		partycleSystem->addGravityGenerator();
+		partycleSystem->addGaussianGenerator();
 		break;
 	}
 	case 'J': {
-		partycleSystem->addWindGenerator();
+		partycleSystem->addUniformGenerator(WindForce);
 		break;
 	}
-
+	case 'G': {
+		partycleSystem->addUniformGenerator(WhirlwindForce);
+		break;
+	}
 	case 'T':
 	{
 		//partycleSystem->shootFirework(5);
@@ -163,7 +166,14 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	}
 	case 'Q':
 	{
-		partycleSystem->shootFirework(1);
+		//partycleSystem->shootFirework(1);
+		partycleSystem->addCircleGenerator(WhirlwindForce);
+		break;
+	}
+	case 'W':
+	{
+		//partycleSystem->shootFirework(1);
+		partycleSystem->addCircleGenerator();
 		break;
 	}
 	case 'L':

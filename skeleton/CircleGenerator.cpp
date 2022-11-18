@@ -1,7 +1,9 @@
 #include "CircleGenerator.h"
 #include "Firework.h"
 
-CircleGenerator::CircleGenerator(Vector3 mean_pos , double numParticles_, double radio_, double generation_probability_, Particle* p,int tipo)
+CircleGenerator::CircleGenerator(Vector3 mean_pos , double numParticles_, double radio_, double generation_probability_, Particle* p,int tipo,typeForce type,
+	double k1, double k2, double K , Vector3 gravity
+	, Vector3 windVel , Vector3 whirlPos )
 {
 	model = p;
 	num_particles = numParticles_;
@@ -9,6 +11,9 @@ CircleGenerator::CircleGenerator(Vector3 mean_pos , double numParticles_, double
 	generation_probability = generation_probability_;
 	tipo_ = tipo;
 	mean_Pos_ = mean_pos;
+
+	typeForce_ = type;
+	setForceGenerator(gravity,k1,k2,windVel,K,whirlPos);
 }
 
 CircleGenerator::~CircleGenerator()

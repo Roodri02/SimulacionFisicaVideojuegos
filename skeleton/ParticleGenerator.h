@@ -20,17 +20,18 @@ public:
 		mean_Pos_ = mean_Pos;
 		if (mean_Vel_ == Vector3( 0, 0,0 ))mean_Vel_ = mean_Vel;
 	};
-	void setForceGenerator() {
+
+	void setForceGenerator(Vector3 gravity,double k1, double k2, Vector3 windVel, double K, Vector3 WhirlPos  ) {
 		switch (typeForce_)
 		{
 		case GravityForce:
-			fg = new GravityForceGenerator({ 0,-9.8,0 });
+			fg = new GravityForceGenerator(gravity);
 			break;
 		case WindForce:
-			fg = new WindGenerator(2, 0.3, { 0,0,5 });
+			fg = new WindGenerator(k1,k2, windVel);
 			break;
 		case WhirlwindForce:
-			fg = new WhirlwindGenerator(0.8,0,-2, { 0,20,0 });
+			fg = new WhirlwindGenerator(k1,k2,K, WhirlPos);
 			break;
 		default:
 			break;
