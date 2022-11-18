@@ -6,6 +6,7 @@
 #include "CircleGenerator.h"
 #include "GravityForceGenerator.h"
 #include "ParticleForceRegistry.h"
+#include "ExplosionGenerator.h"
 
 enum tipoFuerza { GRAVITY_FORCE, DRAG_FORCE };
 
@@ -27,7 +28,7 @@ public:
 	void addFuente2();
 	void addNiebla();
 	void addExplosion();
-
+	void addExplosion1();
 
 
 	void addGravityGenerator();	
@@ -43,5 +44,8 @@ protected:
 	ParticleGenerator* firework_gen;
 	ParticleForceRegistry* PFR;
 
+
+	ExplosionGenerator* exp;
+	bool explosion=false;
 };
 

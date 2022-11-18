@@ -56,6 +56,8 @@ void PartycleSystem::update(double t)
 
 	PFR->updateForces(t);
 
+	if (explosion) exp->addConst(t);
+
 	list<Particle*> aux;
 	for (auto g : _particlesGenerators) {
 		aux = g->generateParticles();
@@ -180,6 +182,20 @@ void PartycleSystem::addExplosion()
 	GaussianParticleGenerator* g = new GaussianParticleGenerator("xd", { 0.2, .2, .2 }, { 20,20,20 },{0,0,0},{0,30,0}, .1, 10, 20, 0.9, base_p);
 	_particlesGenerators.push_back(g);
 
+}
+
+
+void PartycleSystem::addExplosion1()
+{
+
+	if (_particles.size() > 0) {
+		exp = new ExplosionGenerator(200, 200, 100, { 0, 0, 0 });
+		explosion = true;
+	}
+
+	for (auto i : _particles) {
+		PFR->addRegistry(exp, i);
+	}
 }
 
 void PartycleSystem::addGravityGenerator()

@@ -139,7 +139,8 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'X':
 	{
 		//gestorParticulas.push_back(new Proyectil(TipoBala::ARTILLERY));
-		partycleSystem->addFuente2();
+		//partycleSystem->addFuente2();
+		partycleSystem->addExplosion1();
 		break;
 	}
 	case 'C':
