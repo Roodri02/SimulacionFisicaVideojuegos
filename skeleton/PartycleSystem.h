@@ -7,6 +7,7 @@
 #include "GravityForceGenerator.h"
 #include "ParticleForceRegistry.h"
 #include "ExplosionGenerator.h"
+#include "SpringForceGenerator.h"
 
 enum tipoFuerza { GRAVITY_FORCE, DRAG_FORCE };
 
@@ -31,6 +32,8 @@ public:
 	void addExplosionEffect();
 
 	void addParticles(int numParticles);
+
+	void generateSpringDemo();
 
 	void addGaussianGenerator(typeForce t=GravityForce);
 	void addUniformGenerator(typeForce t = GravityForce);

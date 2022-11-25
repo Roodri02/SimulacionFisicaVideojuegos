@@ -216,6 +216,22 @@ void PartycleSystem::addParticles(int numParticles)
 	}
 }
 
+void PartycleSystem::generateSpringDemo()
+{
+	//Particle* p1 = new Particle({ -10.0,10.0,0.0 }, { 0.0,0.0,0.0 }, { 0.0,0.0,0.0 }, 0.85, 60);
+	//Particle* p2 = new Particle({ -10.0,10.0,0.0 }, { 0.0,0.0,0.0 }, { 0.0,0.0,0.0 }, 0.85, 60);
+
+	//p2->setMasa();
+
+	//SpringForceGenerator* f1 = new SpringForceGenerator(1, 10, p2);
+	//PFR->addRegistry(f1, p1);
+	//SpringForceGenerator* f2 = new SpringForceGenerator(1, 10, p1);
+	//PFR->addRegistry(f2, p2);
+
+	//_particlesGenerators.push_back(f1);
+	//_particlesGenerators.push_back(f2);
+}
+
 void PartycleSystem::addGaussianGenerator(typeForce type)
 {
 	Particle* p = new Particle();
