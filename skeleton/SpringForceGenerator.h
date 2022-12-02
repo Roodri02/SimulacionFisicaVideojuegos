@@ -1,19 +1,20 @@
 #pragma once
 #include "ForceGenerator.h"
+#include "Particle.h"
 #include "core.hpp"
 
 class SpringForceGenerator : public ForceGenerator
 {
 public:
 	SpringForceGenerator(double k, double resting_length,Particle* other);
+	~SpringForceGenerator();
+	
+	virtual void updateForce(Particle* particle, double duration);
 
-	virtual void updateForce(Particle* particle);
-
-	inline void setK(double k) {
+	void setK(double k) {
 		_k = k;
 	};
 
-	virtual ~SpringForceGenerator();
 
 protected:
 	double _k;

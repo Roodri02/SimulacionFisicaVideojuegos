@@ -7,7 +7,11 @@ SpringForceGenerator::SpringForceGenerator(double k, double resting_length, Part
 	_other = other;
 }
 
-void SpringForceGenerator::updateForce(Particle* particle)
+SpringForceGenerator::~SpringForceGenerator()
+{
+}
+
+void SpringForceGenerator::updateForce(Particle* particle, double duration)
 {
 
 	Vector3 force = _other->getMeanPos() - particle->getMeanPos();
@@ -16,7 +20,11 @@ void SpringForceGenerator::updateForce(Particle* particle)
 	const float length = force.normalize();
 	const float delta_x = length - _resting_length;
 
-	force *= delta_x * _k;
 
-	particle->addForce(force);
+	if (length > _resting_length) {
+		force *= delta_x * _k;
+
+		particle->addForce(force);
+	}
+
 }

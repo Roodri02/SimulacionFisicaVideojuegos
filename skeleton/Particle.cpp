@@ -3,14 +3,15 @@
 using namespace physx;
 
 
-Particle::Particle(Vector3 pos, Vector3 Vel,Vector3 Ace, double damp, double lifeTime_, Vector4 color)
+Particle::Particle(Vector3 pos, Vector3 Vel,Vector3 Ace, double damp, double lifeTime_, Vector4 color,physx::PxShape* shape)
 {
 	p.vel = Vel;
 	p.ace = Ace;
 	p.damping = damp;
 	p.lifeTime = lifeTime_;
+	p.shape = shape;
 	p.pose = PxTransform(pos.x,pos.y,pos.z);
-	renderItem = new RenderItem(CreateShape(PxSphereGeometry(40)), &p.pose,color);
+	renderItem = new RenderItem(p.shape, &p.pose,color);
 }
 
 Particle::Particle() {
@@ -51,7 +52,7 @@ void Particle::integrate(double t)
 }
 
 void Particle::setParticle(double mass_, double damp, double lifeTime_, Vector3 Vel, Vector3 Pos, Vector3 Ace, Vector4 color,
-	double tamano,Vector3 actionSpace_,Vector3 actionSpaceWidth_,bool dSpace_, bool isVisible_)
+	double tamano,Vector3 actionSpace_,Vector3 actionSpaceWidth_,bool dSpace_, bool isVisible_, physx::PxShape* shape)
 {
 	p.masa = mass_;
 	p.vel = Vel;
@@ -65,8 +66,9 @@ void Particle::setParticle(double mass_, double damp, double lifeTime_, Vector3 
 	p.actionSpaceWidth = actionSpaceWidth_;
 	p.pose = PxTransform(Pos.x, Pos.y, Pos.z);
 	p.isVisible = isVisible_;
+	p.shape = shape;
 	if(p.isVisible)
-		renderItem = new RenderItem(CreateShape(PxSphereGeometry(p.tamano)), &p.pose, p.color);
+		renderItem = new RenderItem(p.shape, &p.pose, p.color);
 }
 
 void Particle::setParticle(Particle* p_)

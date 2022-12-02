@@ -143,6 +143,16 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		partycleSystem->addExplosionEffect();
 		break;
 	}
+	case 'M' :
+	{
+		partycleSystem->generateSpringDemo();
+		break;
+	}
+	case 'K':
+	{
+		partycleSystem->generateAnchoredDemo();
+		break;
+	}
 	case 'C':
 	{
 		//gestorParticulas.push_back(new Proyectil(TipoBala::FIREBALL ));
