@@ -153,6 +153,11 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		partycleSystem->generateAnchoredDemo();
 		break;
 	}
+	case 'B':
+	{
+		partycleSystem->generateBouyancyDemo();
+		break;
+	}
 	case 'C':
 	{
 		//gestorParticulas.push_back(new Proyectil(TipoBala::FIREBALL ));

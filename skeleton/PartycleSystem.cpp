@@ -220,15 +220,15 @@ void PartycleSystem::generateSpringDemo()
 {
 	Particle* p1 = new Particle();
 	Particle* p2 = new Particle();
-	p1->setParticle(2.0, 0.85, 50, { 5,10,0 }, { -10,10,0 }, { 0,0,0 }, { 0.35,0.1,0.8,1 }, 0.5, { 0,0,0 }, { 0,0,0 }, false, true,
+	p1->setParticle(2.0, 0.85, 50, { 0,0,0 }, { -10,10,0 }, { 0,0,0 }, { 0.35,0.1,0.8,1 }, 0.5, { 0,0,0 }, { 0,0,0 }, false, true,
 		CreateShape(physx::PxSphereGeometry(0.5)));
 
 	p2->setParticle(2.0, 0.85, 50, { 0,0,0 }, { 10,10,0 }, { 0,0,0 }, { 0.35,0.1,0.8,1 }, 0.5, { 0,0,0 }, { 0,0,0 }, false, true,
 		CreateShape(physx::PxSphereGeometry(0.5)));
 
-	f1 = new SpringForceGenerator(500, 10, p2);
+	f1 = new SpringForceGenerator(10, 10, p2);
 	PFR->addRegistry(f1, p1);
-	f2 = new SpringForceGenerator(0, 10, p1);
+	f2 = new SpringForceGenerator(10, 10, p1);
 	PFR->addRegistry(f2, p2);
 
 	_particles.push_back(p1);
@@ -238,11 +238,24 @@ void PartycleSystem::generateSpringDemo()
 void PartycleSystem::generateAnchoredDemo()
 {
 	Particle* p3 = new Particle();
-	p3->setParticle(2.0, 0.85, 50, { 5,10,0 }, { -10,10,0 }, { 0,0,0 }, { 0.35,0.1,0.8,1 }, 0.5, { 0,0,0 }, { 0,0,0 }, false, true,
+	p3->setParticle(2.0, 0.85, 50, { 0,0,0 }, { -10,10,0 }, { 0,0,0 }, { 0.35,0.1,0.8,1 }, 0.5, { 0,0,0 }, { 0,0,0 }, false, true,
 		CreateShape(physx::PxSphereGeometry(0.5)));
-	AnchoredSpringFG* f3 = new AnchoredSpringFG(1.0, 10.0, { 10.0,20.0,0.0});
+	AnchoredSpringFG* f3 = new AnchoredSpringFG(1.0, 10.0, { 10.0,10.0,0.0});
 	PFR->addRegistry(f3, p3);
 	_particles.push_back(p3);
+}
+
+void PartycleSystem::generateBouyancyDemo()
+{
+	Particle* p4 = new Particle();
+	p4->setParticle(2.0, 0.85, 50, { 0,0,0 }, { 10,0,0 }, { 0,0,0 }, { 0.35,0.1,0.8,1 }, 0.5, { 0,0,0 }, { 0,0,0 }, false, true,
+		CreateShape(physx::PxSphereGeometry(0.5)));
+	BuoyancyForceGenerator* f4 = new BuoyancyForceGenerator(1, 7, 0.05, 7, 1);
+	PFR->addRegistry(f4, p4);
+	GravityForceGenerator* fg =  new GravityForceGenerator({0,9.8,0});
+	PFR->addRegistry(fg, p4);
+
+	_particles.push_back(p4);
 }
 
 void PartycleSystem::addGaussianGenerator(typeForce type)

@@ -9,6 +9,7 @@
 #include "ExplosionGenerator.h"
 #include "AnchoredSpringFG.h"
 #include "SpringForceGenerator.h"
+#include "BuoyancyForceGenerator.h"
 
 enum tipoFuerza { GRAVITY_FORCE, DRAG_FORCE };
 
@@ -36,6 +37,7 @@ public:
 
 	void generateSpringDemo();
 	void generateAnchoredDemo();
+	void generateBouyancyDemo();
 
 	void addGaussianGenerator(typeForce t=GravityForce);
 	void addUniformGenerator(typeForce t = GravityForce);
