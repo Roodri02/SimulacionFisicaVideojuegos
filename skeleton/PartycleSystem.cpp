@@ -248,11 +248,11 @@ void PartycleSystem::generateAnchoredDemo()
 void PartycleSystem::generateBouyancyDemo()
 {
 	Particle* p4 = new Particle();
-	p4->setParticle(2.0, 0.85, 50, { 0,0,0 }, { 10,0,0 }, { 0,0,0 }, { 0.35,0.1,0.8,1 }, 0.5, { 0,0,0 }, { 0,0,0 }, false, true,
+	p4->setParticle(10, 0.85, 50, { 0,0,0 }, { 10,0,0 }, { 0,0,0 }, { 0.35,0.1,0.8,1 }, 0.5, { 0,0,0 }, { 0,0,0 }, false, true,
 		CreateShape(physx::PxSphereGeometry(0.5)));
-	BuoyancyForceGenerator* f4 = new BuoyancyForceGenerator(1, 7, 0.05, 7, 1);
+	BuoyancyForceGenerator* f4 = new BuoyancyForceGenerator(1, 7, 0.05, 7, 200);
 	PFR->addRegistry(f4, p4);
-	GravityForceGenerator* fg =  new GravityForceGenerator({0,9.8,0});
+	GravityForceGenerator* fg =  new GravityForceGenerator({0,-9.8,0});
 	PFR->addRegistry(fg, p4);
 
 	_particles.push_back(p4);
