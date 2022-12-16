@@ -29,6 +29,13 @@
     <ClCompile Include="SpringForceGenerator.cpp" />
     <ClCompile Include="AnchoredSpringFG.cpp" />
     <ClCompile Include="BuoyancyForceGenerator.cpp" />
+    <ClCompile Include="WorldManager.cpp" />
+    <ClCompile Include="RigidForceGenerator.cpp" />
+    <ClCompile Include="RigidParticle.cpp" />
+    <ClCompile Include="RigidParticleGenerator.cpp" />
+    <ClCompile Include="RigidParticleForceRegistry.cpp" />
+    <ClCompile Include="RigidGaussianParticleGenerator.cpp" />
+    <ClCompile Include="RigidExplosionGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -59,6 +66,13 @@
     <ClInclude Include="SpringForceGenerator.h" />
     <ClInclude Include="AnchoredSpringFG.h" />
     <ClInclude Include="BuoyancyForceGenerator.h" />
+    <ClInclude Include="WorldManager.h" />
+    <ClInclude Include="RigidForceGenerator.h" />
+    <ClInclude Include="RigidParticle.h" />
+    <ClInclude Include="RigidParticleGenerator.h" />
+    <ClInclude Include="RigidParticleForceRegistry.h" />
+    <ClInclude Include="RigidGaussianParticleGenerator.h" />
+    <ClInclude Include="RigidExplosionGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

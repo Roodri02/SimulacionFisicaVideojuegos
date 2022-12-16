@@ -12,6 +12,7 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
+#include "WorldManager.h"
 
 #include <iostream>
 
@@ -37,7 +38,7 @@ PxScene*				gScene      = NULL;
 std::vector<Proyectil*> gestorParticulas;
 PartycleSystem* partycleSystem;
 
-Diana* diana;
+WorldManager* worldManager = NULL;
 
 ContactReportCallback gContactReportCallback;
 
@@ -59,7 +60,7 @@ void initPhysics(bool interactive)
 
 	// For Solid Rigids +++++++++++++++++++++++++++++++++++++
 	PxSceneDesc sceneDesc(gPhysics->getTolerancesScale());
-	sceneDesc.gravity = PxVec3(0.0f, 0.0f, 0.0f);
+	sceneDesc.gravity = PxVec3(0.0f, -9.8f, 0.0f);
 	gDispatcher = PxDefaultCpuDispatcherCreate(2);
 	sceneDesc.cpuDispatcher = gDispatcher;
 	sceneDesc.filterShader = contactReportFilterShader;
@@ -67,6 +68,8 @@ void initPhysics(bool interactive)
 	gScene = gPhysics->createScene(sceneDesc);
 
 	partycleSystem = new PartycleSystem();
+
+	worldManager = new WorldManager(gScene, gPhysics);
 
 	partycleSystem->generateFireworkSystem();
 
@@ -80,24 +83,15 @@ void stepPhysics(bool interactive, double t)
 {
 	PX_UNUSED(interactive);
 
-	
-	//diana = new Diana();
-	
-	partycleSystem->update(t);
-
-	for (int i = 0; i < gestorParticulas.size(); i++) {
-		
-		gestorParticulas[i]->integrate(t);
-		
-		if (!gestorParticulas[i]->isAlive()) {
-			delete gestorParticulas[i];
-			gestorParticulas.erase(gestorParticulas.begin() + i);
-			i--;
-		}
-	}
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
+	
+	partycleSystem->update(t);
+
+	if (t < 0.1) {
+		worldManager->update(t);
+	}
 }
 
 // Function to clean data
@@ -140,12 +134,14 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 		//gestorParticulas.push_back(new Proyectil(TipoBala::ARTILLERY));
 		//partycleSystem->addFuente2();
-		partycleSystem->addExplosionEffect();
+		//partycleSystem->addExplosionEffect();
+		worldManager->addExplosion();
 		break;
 	}
 	case 'M' :
 	{
-		partycleSystem->generateSpringDemo();
+		//partycleSystem->generateSpringDemo();
+		worldManager->noExplosion();
 		break;
 	}
 	case 'K':
@@ -197,7 +193,8 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		break;
 	}
 	case 'F' : {
-		partycleSystem->addFuente();
+		//partycleSystem->addFuente();
+		worldManager->addRigidGaussianGenerator();
 		break;
 	}
 	case 'N': {
@@ -219,6 +216,8 @@ void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 {
 	PX_UNUSED(actor1);
 	PX_UNUSED(actor2);
+
+	worldManager->collisionEfect(actor1, actor2);
 }
 
 
