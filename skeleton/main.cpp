@@ -60,7 +60,7 @@ void initPhysics(bool interactive)
 
 	// For Solid Rigids +++++++++++++++++++++++++++++++++++++
 	PxSceneDesc sceneDesc(gPhysics->getTolerancesScale());
-	sceneDesc.gravity = PxVec3(0.0f, -9.8f, 0.0f);
+	sceneDesc.gravity = PxVec3(0.0f, 0.0f, 0.0f);
 	gDispatcher = PxDefaultCpuDispatcherCreate(2);
 	sceneDesc.cpuDispatcher = gDispatcher;
 	sceneDesc.filterShader = contactReportFilterShader;
@@ -70,8 +70,6 @@ void initPhysics(bool interactive)
 	partycleSystem = new PartycleSystem();
 
 	worldManager = new WorldManager(gScene, gPhysics);
-
-	partycleSystem->generateFireworkSystem();
 
 }
 
@@ -124,84 +122,31 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 	switch(toupper(key))
 	{
-	case 'Z': 
+	case '1':
 	{
-		//gestorParticulas.push_back(new Proyectil(TipoBala::PISTOL));
-		partycleSystem->borraGenerator();
-		break; 
-	}
-	case 'X':
-	{
-		//gestorParticulas.push_back(new Proyectil(TipoBala::ARTILLERY));
-		//partycleSystem->addFuente2();
-		//partycleSystem->addExplosionEffect();
-		worldManager->addExplosion();
+		//HACER QUE SE GENERE EL PRIMER TIPO DE ENEMIGO
+		worldManager->comienzaRonda1();
 		break;
 	}
-	case 'M' :
+	case '2':
 	{
-		//partycleSystem->generateSpringDemo();
-		worldManager->noExplosion();
+		//HACER QUE SE GENERE EL SEGUNDO TIPO DE ENEMIGO
+		std::cout << "Hola\n";
 		break;
 	}
-	case 'K':
+	case '3':
 	{
-		partycleSystem->generateAnchoredDemo();
+		//HACER QUE SE GENERE EL TERCER TIPO DE ENEMIGO
 		break;
 	}
-	case 'B':
+	case '4':
 	{
-		partycleSystem->generateBouyancyDemo();
-		break;
-	}
-	case 'C':
-	{
-		//gestorParticulas.push_back(new Proyectil(TipoBala::FIREBALL ));
-		//partycleSystem->addExplosion();
-		partycleSystem->addGaussianGenerator();
+		//HACER QUE SE GENERE EL CUARTO TIPO DE ENEMIGO
 		break;
 	}
 	case 'J': {
-		partycleSystem->addUniformGenerator(WindForce);
-		break;
+		worldManager->shoot();
 	}
-	case 'G': {
-		partycleSystem->addUniformGenerator(WhirlwindForce);
-		break;
-	}
-	case 'T':
-	{
-		//partycleSystem->shootFirework(5);
-		partycleSystem->addParticles(20);
-		break;
-	}
-	case 'Q':
-	{
-		//partycleSystem->shootFirework(1);
-		partycleSystem->addCircleGenerator(WhirlwindForce);
-		break;
-	}
-	case 'W':
-	{
-		//partycleSystem->shootFirework(1);
-		partycleSystem->addCircleGenerator();
-		break;
-	}
-	case 'L':
-	{
-		partycleSystem->shootFirework(2);
-		break;
-	}
-	case 'F' : {
-		//partycleSystem->addFuente();
-		worldManager->addRigidGaussianGenerator();
-		break;
-	}
-	case 'N': {
-		partycleSystem->addNiebla();
-		break;
-	}
-
 	//case ' ':	break;
 	case ' ':
 	{

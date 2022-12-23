@@ -29,6 +29,24 @@ public:
 	void addExplosion();
 	void noExplosion();
 
+
+	void shoot();
+
+	void comienzaRonda1() {
+		enemigosActuales = enemigosTipo1;
+		addRigidGaussianGenerator();
+	}
+
+	void comienzaRonda2() {
+		enemigosActuales = enemigosTipo1;
+		addRigidGaussianGenerator();
+	}
+
+	void comienzaRonda3() {
+		enemigosActuales = enemigosTipo1;
+		addRigidGaussianGenerator();
+	}
+
 private:
 
 	list<RigidParticle*> rigidParticles;
@@ -44,9 +62,14 @@ private:
 
 	double generationCoolDown;
 	double actualCoolDown;
+	double enemigosActuales;
+	double bulletSpeed = 200;
+	double bulletSize = 0.5;
 
 	std::random_device rd{};
 	std::mt19937 gen{ rd() };
+
+	double enemigosTipo1, enemigosTipo2, enemigosTipo3;
 
 };
 

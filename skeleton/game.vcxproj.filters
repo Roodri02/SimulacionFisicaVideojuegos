@@ -36,6 +36,7 @@
     <ClCompile Include="RigidParticleForceRegistry.cpp" />
     <ClCompile Include="RigidGaussianParticleGenerator.cpp" />
     <ClCompile Include="RigidExplosionGenerator.cpp" />
+    <ClCompile Include="RigidGravityForceGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -73,6 +74,7 @@
     <ClInclude Include="RigidParticleForceRegistry.h" />
     <ClInclude Include="RigidGaussianParticleGenerator.h" />
     <ClInclude Include="RigidExplosionGenerator.h" />
+    <ClInclude Include="RigidGravityForceGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

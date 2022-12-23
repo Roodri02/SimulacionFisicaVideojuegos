@@ -6,18 +6,37 @@
 
 #include <list>
 #include <random>
+#include "RigidForceGenerator.h"
+#include "RigidGravityForceGenerator.h"
 
 using namespace physx;
 using namespace std;
+
+enum typeForce1 { RigidGravityForce, NoForce};
+
 
 class RigidParticleGenerator
 {
 public:
 	virtual std::list<RigidParticle*> generateParticles(PxPhysics* gPhysics, PxScene* gScene_) = 0;
+	void setForceGenerator(Vector3 gravity) {
+		switch (typeForce_)
+		{
+		case RigidGravityForce:
+			fg = new RigidGravityForceGenerator(gravity);
+			break;
+		case NoForce:
+			break;
+		default:
+			break;
+		}
+	}
 
+	RigidForceGenerator* getForceGenerator() {
+		return fg;
+	}
 
 protected:
-
 
 
 	PxShape* shape;
@@ -26,6 +45,8 @@ protected:
 	Vector3 mean_Pos_, mean_Vel_;
 	double generation_probability, mean_t;
 	int num_particles;
+	RigidForceGenerator* fg = nullptr;
+	typeForce1 typeForce_;
 
 };
 

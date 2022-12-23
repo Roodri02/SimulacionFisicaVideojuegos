@@ -3,7 +3,7 @@
 
 
 RigidGaussianParticleGenerator::RigidGaussianParticleGenerator(PxShape* shape_, int num_particles_,double generation_probability_, 
-	double std_dev_t_, double _mean_t_,PxVec3 std_dev_pos_)
+	double std_dev_t_, double _mean_t_,PxVec3 std_dev_pos_, typeForce1 type)
 {
 	shape = shape_;
 	std_dev_t = std_dev_t_;
@@ -12,6 +12,9 @@ RigidGaussianParticleGenerator::RigidGaussianParticleGenerator(PxShape* shape_, 
 	mean_t = _mean_t_;
 	mean_Vel_ = { 0,0,0 };
 	std_dev_pos = std_dev_pos_;
+	typeForce_ = type;
+
+	setForceGenerator({ 0,-9.8,0 });
 }
 
 std::list<RigidParticle*> RigidGaussianParticleGenerator::generateParticles(PxPhysics* gPhysics, PxScene* gScene_)
@@ -38,7 +41,7 @@ std::list<RigidParticle*> RigidGaussianParticleGenerator::generateParticles(PxPh
 			new_solid->setAngularVelocity({ 0,0,0 });
 			PxRigidBodyExt::setMassAndUpdateInertia(*new_solid, d(gen));
 			renderItem = new RenderItem(shape, new_solid, { 0.7, 0.1, 0.3, 1 });
-			RigidParticle* rp = new RigidParticle(new_solid, tiempoVida(gen), renderItem);
+			RigidParticle* rp = new RigidParticle(new_solid, tiempoVida(gen), renderItem,5);
 
 			gScene_->addActor(*new_solid);
 			listRigidParticles.push_back(rp);

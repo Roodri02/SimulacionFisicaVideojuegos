@@ -19,7 +19,7 @@ GaussianParticleGenerator::GaussianParticleGenerator(string name_,Vector3 std_de
 
 	 typeForce_ = T;
 
-	 setForceGenerator(gravity,k1,k2,windVel,K,whirlPos);
+	 //setForceGenerator(gravity,k1,k2,windVel,K,whirlPos);
 
 	distr = std::uniform_real_distribution<double>(0, 1);
 }

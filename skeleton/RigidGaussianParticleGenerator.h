@@ -5,7 +5,7 @@ class RigidGaussianParticleGenerator : public  RigidParticleGenerator
 {
 public:
 	RigidGaussianParticleGenerator(PxShape* shape_, int num_particles_,
-		double generation_probability_, double std_dev_t_, double _mean_t_, PxVec3 std_dev_pos_);
+		double generation_probability_, double std_dev_t_, double _mean_t_, PxVec3 std_dev_pos_, typeForce1 type = NoForce);
 	~RigidGaussianParticleGenerator() {};
 
 	std::list<RigidParticle*> generateParticles(PxPhysics* gPhysics, PxScene* gScene_) override;

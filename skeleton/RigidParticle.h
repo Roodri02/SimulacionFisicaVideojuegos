@@ -7,12 +7,15 @@
 using namespace std;
 using namespace physx;
 
+
+enum typeRigidParticle { Bullet, Static ,Enemy};
+
 class RigidParticle
 {
 
 public:
 
-	RigidParticle(PxRigidDynamic* pxRigidDynamic_, double lifeTime_, RenderItem* renderItem_);
+	RigidParticle(PxRigidDynamic* pxRigidDynamic_, double lifeTime_, RenderItem* renderItem_,double mass);
 	~RigidParticle();
 
 	PxRigidActor* getPxActor() {
@@ -29,6 +32,10 @@ public:
 		return isAlive_;
 	}
 
+	double getMass() {
+		return mass_;
+	}
+
 private:
 
 	PxRigidDynamic* pxRigidDynamic;
@@ -36,6 +43,7 @@ private:
 
 	double lifeTime;
 	bool isAlive_ = true;
+	double mass_;
 
 };
 

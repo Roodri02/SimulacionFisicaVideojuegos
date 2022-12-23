@@ -8,7 +8,7 @@
 
 using namespace std;
 
-enum typeForce { GravityForce, WindForce, WhirlwindForce };
+enum typeForce { GravityForce, WindForce, WhirlwindForce,Nada };
 
 class ParticleGenerator 
 {
@@ -45,7 +45,7 @@ public:
 
 protected:
 
-	ForceGenerator* fg;
+	ForceGenerator* fg=nullptr;
 	typeForce typeForce_;
 
 	Vector3 mean_Pos_, mean_Vel_;
