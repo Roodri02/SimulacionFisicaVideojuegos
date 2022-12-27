@@ -9,6 +9,7 @@
 #include "RigidParticleForceRegistry.h"
 #include "RigidGaussianParticleGenerator.h"
 #include "RigidExplosionGenerator.h"
+#include "PartycleSystem.h"
 
 using namespace physx;
 using namespace std;
@@ -18,34 +19,23 @@ class WorldManager
 
 public:
 
-	WorldManager(PxScene* gScene_, PxPhysics* gPhysics_);
+	WorldManager(PxScene* gScene_, PxPhysics* gPhysics_, PartycleSystem* particleSystem);
 	~WorldManager();
 
 	void collisionEfect(PxActor* actor1, PxActor* actor2);
 	void update(double t);
 	void deleteGenerators();
-
-	void addRigidGaussianGenerator();
-	void addExplosion();
+	void addExplosion(Vector3 pos);
 	void noExplosion();
 
 
 	void shoot();
 
-	void comienzaRonda1() {
-		enemigosActuales = enemigosTipo1;
-		addRigidGaussianGenerator();
-	}
+	void comienzaRonda1();
 
-	void comienzaRonda2() {
-		enemigosActuales = enemigosTipo1;
-		addRigidGaussianGenerator();
-	}
+	void comienzaRonda2();
 
-	void comienzaRonda3() {
-		enemigosActuales = enemigosTipo1;
-		addRigidGaussianGenerator();
-	}
+	void comienzaRonda3();
 
 private:
 
@@ -56,6 +46,7 @@ private:
 
 	PxScene* gScene;
 	PxPhysics* gPhysics;
+	PartycleSystem* particleSystem_;
 	RenderItem* item;
 
 	RigidExplosionGenerator* explosion = nullptr;
@@ -70,6 +61,8 @@ private:
 	std::mt19937 gen{ rd() };
 
 	double enemigosTipo1, enemigosTipo2, enemigosTipo3;
+	double enemigosEliminados = 0;
+
 
 };
 

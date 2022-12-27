@@ -7,8 +7,10 @@ class UniformParticleGenerator : public ParticleGenerator
 
 public: 
 	UniformParticleGenerator(string name_, int num_particles_, double generation_probability_,
-		Vector3 pos_widht, Vector3 vel_widht, Particle* base_p_,typeForce T = GravityForce, double k1 = 0.3, double k2 = 0, double K = -10, Vector3 gravity = { 0,-9.8,0 }
-	, Vector3 windVel = { 0,0,20 }, Vector3 whirlPos = { 0,50,0 });
+		Vector3 pos_widht, Vector3 vel_widht, Vector3 mean_pos_, Vector3 mean_vel_, Particle* base_p_,typeForce T = GravityForce, double k1 = 0.3, double k2 = 0, double K = -10, Vector3 gravity = { 0,-9.8,0 }
+	, Vector3 windVel = { 0,0,20 }, Vector3 whirlPos = { 0,50,0 }, bool active = true);
+
+
 	~UniformParticleGenerator();
 
 

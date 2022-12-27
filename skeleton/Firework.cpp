@@ -77,7 +77,7 @@ void Firework::setFirework(Vector3 pos, Vector3 vel_, double lifeTime_, double d
     p.tamano = tamano_;
     p.ace = ace_;
     p.color = color_;
-
+    p.masa = 5;
     renderItem = new RenderItem(CreateShape(PxSphereGeometry(p.tamano)), &p.pose, p.color);
 
 }

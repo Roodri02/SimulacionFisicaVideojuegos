@@ -69,7 +69,7 @@ void initPhysics(bool interactive)
 
 	partycleSystem = new PartycleSystem();
 
-	worldManager = new WorldManager(gScene, gPhysics);
+	worldManager = new WorldManager(gScene, gPhysics, partycleSystem);
 
 }
 
@@ -131,7 +131,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case '2':
 	{
 		//HACER QUE SE GENERE EL SEGUNDO TIPO DE ENEMIGO
-		std::cout << "Hola\n";
+		worldManager->comienzaRonda2();
 		break;
 	}
 	case '3':

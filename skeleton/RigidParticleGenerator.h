@@ -41,7 +41,7 @@ protected:
 
 	PxShape* shape;
 	RenderItem* renderItem;
-	PxVec3 std_dev_pos;
+	PxVec3 std_dev_pos, std_dev_vel;
 	Vector3 mean_Pos_, mean_Vel_;
 	double generation_probability, mean_t;
 	int num_particles;

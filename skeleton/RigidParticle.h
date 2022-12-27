@@ -8,14 +8,14 @@ using namespace std;
 using namespace physx;
 
 
-enum typeRigidParticle { Bullet, Static ,Enemy};
+enum typeRigidParticle { Bullet, Static ,Enemy,Bomba};
 
 class RigidParticle
 {
 
 public:
 
-	RigidParticle(PxRigidDynamic* pxRigidDynamic_, double lifeTime_, RenderItem* renderItem_,double mass);
+	RigidParticle(PxRigidDynamic* pxRigidDynamic_, double lifeTime_, RenderItem* renderItem_,double mass, typeRigidParticle type = Enemy);
 	~RigidParticle();
 
 	PxRigidActor* getPxActor() {
@@ -36,6 +36,10 @@ public:
 		return mass_;
 	}
 
+	typeRigidParticle getType() {
+		return type_;
+	}
+
 private:
 
 	PxRigidDynamic* pxRigidDynamic;
@@ -44,6 +48,8 @@ private:
 	double lifeTime;
 	bool isAlive_ = true;
 	double mass_;
+	
+	typeRigidParticle type_;
 
 };
 

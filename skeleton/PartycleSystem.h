@@ -25,11 +25,17 @@ public:
 	void addExplosionEffect();
 
 	void generateBouyancyDemo();
+	void addFuente();
 
 	void addGaussianGenerator(typeForce t= GravityForce);
 	void addUniformGenerator(typeForce t = GravityForce);
 	void addCircleGenerator(typeForce t = GravityForce);
 	void borraGenerator();
+	void createFireworks();
+	void activaFireworks();
+	void desactivaFirework();
+	void generateAnchoredDemo(Vector3 pos);
+	void explodeEnemy(Vector3 pos);
 	
 protected:
 	std::list<Particle*> _particles;
@@ -42,6 +48,9 @@ protected:
 
 	SpringForceGenerator* f1;
 	SpringForceGenerator* f2;
+
+	UniformParticleGenerator* fireworkGenerator1;
+	UniformParticleGenerator* fireworkGenerator2;
 
 	ExplosionGenerator* exp;
 	bool explosion=false;

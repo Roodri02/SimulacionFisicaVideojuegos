@@ -39,6 +39,14 @@ public:
 	}
 
 
+	bool isActive() {
+		return active_;
+	}
+
+	void setActive(bool a) {
+		active_ = a;
+	}
+
 	ForceGenerator* getForceGenerator() {
 		return fg;
 	}
@@ -47,7 +55,7 @@ protected:
 
 	ForceGenerator* fg=nullptr;
 	typeForce typeForce_;
-
+	bool active_;
 	Vector3 mean_Pos_, mean_Vel_;
 	Particle* model;
 
