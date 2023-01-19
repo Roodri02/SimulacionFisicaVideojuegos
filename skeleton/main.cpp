@@ -137,6 +137,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case '3':
 	{
 		//HACER QUE SE GENERE EL TERCER TIPO DE ENEMIGO
+		worldManager->comienzaRonda3();
 		break;
 	}
 	case '4':

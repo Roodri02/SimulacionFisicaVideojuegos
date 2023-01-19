@@ -209,14 +209,14 @@ void PartycleSystem::addFuente()
 {
 
 	Particle* base_p = new Particle();
-	base_p->setParticle(5, 0.999, 4.7, { 0,0,0 }, { 0,0,0 }, { 0,9.8,0 }, { 0.3,.8,0.3,1 }, 0.6, { 0,0,0 }, { 0,0,0 },
+	base_p->setParticle(5, 0.999, 4.7, { 0,0,0 }, { 0,0,0 }, { 0,9.8,0 }, { 0.0,0,0.0,1 }, 0.6, { 0,0,0 }, { 0,0,0 },
 		false, false,CreateShape(physx::PxSphereGeometry(3)));
 	CircleGenerator* c = new CircleGenerator({ 130,40,-200 }, 3, 3, 0.9, base_p,0,WhirlwindForce,0.5,0.0,-10,{0,0,0},{0,0,0},{130,100,-200});
 	_particlesGenerators.push_back(c);
 
 
 	Particle* base_p1 = new Particle();
-	base_p1->setParticle(5, 0.999, 4.7, { 0,0,0 }, { 0,0,0 }, { 0,9.8,0 }, { 0.3,.8,0.3,1 }, 0.6, { 0,0,0 }, { 0,0,0 },
+	base_p1->setParticle(5, 0.999, 4.7, { 0,0,0 }, { 0,0,0 }, { 0,9.8,0 }, { 0.0,0,0.0,1 }, 0.6, { 0,0,0 }, { 0,0,0 },
 		false, false, CreateShape(physx::PxSphereGeometry(3)));
 	CircleGenerator* c1 = new CircleGenerator({ -30,40,-200 }, 3, 3, 0.9, base_p1, 0, WhirlwindForce, 0.5, 0.0, -10, { 0,0,0 }, { 0,0,0 }, { -30,100,-200 });
 	_particlesGenerators.push_back(c1);

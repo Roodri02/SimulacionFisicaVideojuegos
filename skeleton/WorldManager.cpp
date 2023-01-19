@@ -207,8 +207,8 @@ void WorldManager::comienzaRonda3() {
 	enemigosEliminar = enemigosEliminarRonda3;
 	particleSystem_->desactivaFirework();
 	PxMaterial* gMaterial = gPhysics->createMaterial(0.5f, 0.5f, 0.6f);
-	RigidGaussianParticleGenerator* rgpg = new RigidGaussianParticleGenerator(CreateShape(PxBoxGeometry(6, 6, 6), gMaterial), 1, 0.9, 1, 5, { 45,0.1,45 },{0,0,0});
-	rgpg->setMeanPos({ 50,50,0 }, { 0,0,0 });
+	RigidGaussianParticleGenerator* rgpg = new RigidGaussianParticleGenerator(CreateShape(PxBoxGeometry(6, 6, 6), gMaterial), 1, 0.9, 1, 5, { 45,0.1,45 },{ 0.1,30.0,0.1 });
+	rgpg->setMeanPos({ 50,50,0 }, { 0,50,0 });
 	rigidParticleGen.push_back(rgpg);
 }
 
