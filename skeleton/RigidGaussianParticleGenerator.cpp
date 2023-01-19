@@ -15,7 +15,7 @@ RigidGaussianParticleGenerator::RigidGaussianParticleGenerator(PxShape* shape_, 
 	std_dev_vel = std_dev_vel_;
 	typeForce_ = type;
 
-	setForceGenerator({ 0,-9.8,0 });
+	setForceGenerator(typeForce_);
 }
 
 std::list<RigidParticle*> RigidGaussianParticleGenerator::generateParticles(PxPhysics* gPhysics, PxScene* gScene_)

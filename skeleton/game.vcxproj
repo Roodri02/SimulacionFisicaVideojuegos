@@ -308,6 +308,7 @@
     <ClCompile Include="RigidParticle.cpp" />
     <ClCompile Include="RigidParticleForceRegistry.cpp" />
     <ClCompile Include="RigidParticleGenerator.cpp" />
+    <ClCompile Include="RigidWindGenerator.cpp" />
     <ClCompile Include="SpringForceGenerator.cpp" />
     <ClCompile Include="UniformParticleGenerator.cpp" />
     <ClCompile Include="WhirlwindGenerator.cpp" />
@@ -342,6 +343,7 @@
     <ClInclude Include="RigidParticle.h" />
     <ClInclude Include="RigidParticleForceRegistry.h" />
     <ClInclude Include="RigidParticleGenerator.h" />
+    <ClInclude Include="RigidWindGenerator.h" />
     <ClInclude Include="SpringForceGenerator.h" />
     <ClInclude Include="UniformParticleGenerator.h" />
     <ClInclude Include="WhirlwindGenerator.h" />

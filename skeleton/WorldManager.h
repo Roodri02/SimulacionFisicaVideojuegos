@@ -61,7 +61,8 @@ private:
 	std::mt19937 gen{ rd() };
 
 	double enemigosTipo1, enemigosTipo2, enemigosTipo3;
-	double enemigosEliminados = 0;
+	double enemigosEliminados = 0 , enemigosEliminar = 0;
+	double enemigosEliminarRonda1, enemigosEliminarRonda2, enemigosEliminarRonda3;
 
 
 };

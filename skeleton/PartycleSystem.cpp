@@ -9,7 +9,7 @@ PartycleSystem::PartycleSystem()
 
 	float x = -20;
 	for (int i = 0; i < 8; i++) {
-		generateAnchoredDemo({ x,110,-200 });
+		generateAnchoredDemo({ x,320,-200 });
 		x += 20;
 	}
 }
@@ -185,7 +185,7 @@ void PartycleSystem::generateAnchoredDemo(Vector3 pos)
 	Particle* p3 = new Particle();
 	p3->setParticle(2.0, 0.85, 50, { 0,0,0 }, {pos.x,pos.y-20,pos.z}, {0,-1.5,0}, {0.35,0.1,0.8,1}, 3, {0,0,0}, {0,0,0}, false, true,
 		CreateShape(physx::PxSphereGeometry(3)));
-	AnchoredSpringFG* f3 = new AnchoredSpringFG(1, 5, pos);
+	AnchoredSpringFG* f3 = new AnchoredSpringFG(40, 10, pos);
 	PFR->addRegistry(f3, p3);
 	_particles.push_back(p3);
 }
@@ -209,16 +209,16 @@ void PartycleSystem::addFuente()
 {
 
 	Particle* base_p = new Particle();
-	base_p->setParticle(5, 0.999, 4, { 0,0,0 }, { 0,0,0 }, { 0,9.8,0 }, { 0.3,.8,0.3,1 }, 0.6, { 0,0,0 }, { 0,0,0 },
+	base_p->setParticle(5, 0.999, 4.7, { 0,0,0 }, { 0,0,0 }, { 0,9.8,0 }, { 0.3,.8,0.3,1 }, 0.6, { 0,0,0 }, { 0,0,0 },
 		false, false,CreateShape(physx::PxSphereGeometry(3)));
-	CircleGenerator* c = new CircleGenerator({ 130,40,-200 }, 1, 3, 0.9, base_p,0,Nada);
+	CircleGenerator* c = new CircleGenerator({ 130,40,-200 }, 3, 3, 0.9, base_p,0,WhirlwindForce,0.5,0.0,-10,{0,0,0},{0,0,0},{130,100,-200});
 	_particlesGenerators.push_back(c);
 
 
 	Particle* base_p1 = new Particle();
-	base_p1->setParticle(5, 0.999, 4, { 0,0,0 }, { 0,0,0 }, { 0,9.8,0 }, { 0.3,.8,0.3,1 }, 0.6, { 0,0,0 }, { 0,0,0 },
+	base_p1->setParticle(5, 0.999, 4.7, { 0,0,0 }, { 0,0,0 }, { 0,9.8,0 }, { 0.3,.8,0.3,1 }, 0.6, { 0,0,0 }, { 0,0,0 },
 		false, false, CreateShape(physx::PxSphereGeometry(3)));
-	CircleGenerator* c1 = new CircleGenerator({ -30,40,-200 }, 1, 3, 0.9, base_p1, 0, Nada);
+	CircleGenerator* c1 = new CircleGenerator({ -30,40,-200 }, 3, 3, 0.9, base_p1, 0, WhirlwindForce, 0.5, 0.0, -10, { 0,0,0 }, { 0,0,0 }, { -30,100,-200 });
 	_particlesGenerators.push_back(c1);
 }
 

@@ -8,7 +8,7 @@
 
 using namespace std;
 
-enum typeForce { GravityForce, WindForce, WhirlwindForce,Nada };
+enum typeForce { GravityForce, WindForce1, WhirlwindForce,Nada };
 
 class ParticleGenerator 
 {
@@ -27,7 +27,7 @@ public:
 		case GravityForce:
 			fg = new GravityForceGenerator(gravity);
 			break;
-		case WindForce:
+		case WindForce1:
 			fg = new WindGenerator(k1,k2, windVel);
 			break;
 		case WhirlwindForce:

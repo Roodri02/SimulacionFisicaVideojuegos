@@ -8,22 +8,26 @@
 #include <random>
 #include "RigidForceGenerator.h"
 #include "RigidGravityForceGenerator.h"
+#include "RigidWindGenerator.h"
 
 using namespace physx;
 using namespace std;
 
-enum typeForce1 { RigidGravityForce, NoForce};
+enum typeForce1 { RigidGravityForce,WindForce, NoForce};
 
 
 class RigidParticleGenerator
 {
 public:
 	virtual std::list<RigidParticle*> generateParticles(PxPhysics* gPhysics, PxScene* gScene_) = 0;
-	void setForceGenerator(Vector3 gravity) {
+	void setForceGenerator(typeForce1) {
 		switch (typeForce_)
 		{
 		case RigidGravityForce:
-			fg = new RigidGravityForceGenerator(gravity);
+			fg = new RigidGravityForceGenerator({0,-9.8,0});
+			break;
+		case WindForce:
+			fg = new RigidWindGenerator(0.8,0, { 0,0,0.0001 });
 			break;
 		case NoForce:
 			break;
